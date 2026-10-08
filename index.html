@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#080b10">
+<title>JO STADIUM — Réservation 6×6</title>
+<style>
+:root{--bg:#070a0f;--surface:#10151d;--surface2:#161d27;--line:#252d39;--text:#f7f9fc;--muted:#98a3b3;--accent:#ff3b30;--green:#2dd58a}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.5}a{text-decoration:none;color:inherit}button,input,select,textarea{font:inherit}
+.header{position:sticky;top:0;z-index:100;height:76px;padding:0 max(18px,5vw);display:flex;align-items:center;justify-content:space-between;background:linear-gradient(180deg,rgba(0,0,0,.98),rgba(7,10,15,.94));backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.08)}
+.logo{display:flex;align-items:center;gap:10px;font-weight:950;font-size:29px;letter-spacing:-1.4px;white-space:nowrap}.brand-icon{width:48px;height:48px;object-fit:contain;display:block;filter:drop-shadow(0 5px 14px rgba(0,0,0,.55))}.brand-jo{color:#fff}.brand-stadium{color:var(--accent)}.nav{display:flex;gap:24px;color:#c8ced8;font-size:13px;font-weight:800}.nav a{position:relative;padding:27px 0}.nav a:hover,.nav a:focus{color:#fff}.menu{display:none;background:none;border:0;color:#fff;font-size:30px;line-height:1;cursor:pointer}
+.hero{position:relative;overflow:hidden;min-height:650px;padding:75px max(20px,8vw);display:flex;align-items:center;background-image:linear-gradient(90deg,rgba(5,7,10,.98) 0%,rgba(5,7,10,.82) 42%,rgba(5,7,10,.28) 78%,rgba(5,7,10,.72) 100%),linear-gradient(0deg,rgba(5,7,10,.9),transparent 45%),url("https://dynamic-media-cdn.tripadvisor.com/media/photo-o/24/16/1b/cd/iron-park-zaouia-beni.jpg?h=-1&s=1&w=1200");background-size:cover;background-position:center}
+.hero-content{position:relative;z-index:2;max-width:730px}.eyebrow{font-size:11px;font-weight:900;letter-spacing:2px;color:#ff655d;margin:0 0 12px}.hero h1{font-size:clamp(44px,7vw,76px);line-height:.98;letter-spacing:-3px;margin:0 0 22px}.hero h1 span{color:var(--accent)}.hero p:not(.eyebrow){color:var(--muted);font-size:17px;max-width:610px;margin:0 0 25px}.location{display:flex;gap:9px;align-items:center;color:#dfe4eb;margin-bottom:28px;font-size:14px}
+.actions{display:flex;gap:10px;flex-wrap:wrap}.btn{display:inline-flex;justify-content:center;align-items:center;border:0;border-radius:11px;padding:13px 20px;font-weight:850;cursor:pointer;transition:.2s}.primary{background:var(--accent);color:#fff;box-shadow:0 12px 30px rgba(255,59,48,.2)}.primary:hover{transform:translateY(-2px)}.ghost{border:1px solid #343d49;color:#fff;background:rgba(255,255,255,.02)}
+.hero-badge{position:absolute;right:10%;bottom:70px;background:rgba(16,21,29,.92);border:1px solid #303946;padding:17px 19px;border-radius:15px}.hero-badge strong,.hero-badge small{display:block}.hero-badge small{color:var(--muted);margin-top:3px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);border-block:1px solid var(--line);background:#0c1016}.stat{text-align:center;padding:24px 10px;border-right:1px solid var(--line)}.stat:last-child{border:0}.stat strong{font-size:25px}.stat span{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+.section{max-width:1180px;margin:auto;padding:75px max(20px,5vw)}.heading{margin-bottom:27px}.heading h2{font-size:38px;line-height:1.05;letter-spacing:-1.2px;margin:0}.eyebrow{margin-bottom:10px}
+.stadium-card{display:grid;grid-template-columns:1fr 1.25fr;gap:0;overflow:hidden;background:var(--surface);border:1px solid var(--line);border-radius:20px}.cover{min-height:320px;display:grid;place-items:center;font-size:90px;background:radial-gradient(circle at 50% 30%,#293340,#121821 62%,#0e131a);overflow:hidden}.cover img{width:100%;height:100%;min-height:320px;object-fit:cover;display:block}.body{padding:32px}.tag{display:inline-block;color:#ff7770;background:rgba(255,59,48,.1);border-radius:7px;padding:6px 10px;font-size:10px;font-weight:900;letter-spacing:.7px}.body h3{font-size:28px;margin:13px 0 8px}.info{display:grid;gap:10px;margin:20px 0;color:#d9dee6;font-size:14px}.info span{color:var(--muted)}.price-box{display:flex;align-items:end;gap:8px;margin:25px 0}.price{font-size:32px;font-weight:900}.per{color:var(--muted);font-size:13px;margin-bottom:6px}
+.booking-wrap{background:linear-gradient(180deg,#0b0f15,#0e131a);border-block:1px solid var(--line)}.booking{display:grid;grid-template-columns:.7fr 1.3fr;gap:50px}.intro{padding-top:12px}.intro h2{font-size:41px;line-height:1.05;margin:0 0 14px}.intro>p:not(.eyebrow){color:var(--muted);max-width:410px}.checks{margin-top:25px}.check{margin:12px 0;color:#d9dee6;font-size:14px}.check b{color:var(--green);margin-right:8px}
+.booking-type{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}.type-card{display:flex;align-items:center;gap:10px;text-align:left;padding:13px;border:1px solid #2b3440;border-radius:14px;background:#0b1016;color:#fff;cursor:pointer;transition:.2s}.type-card>span{font-size:21px}.type-card strong{display:block;font-size:12px}.type-card small{display:block;color:#7f8a99;font-size:10px;margin-top:3px}.type-card.active{border-color:var(--accent);background:rgba(255,59,48,.08);box-shadow:0 0 0 1px rgba(255,59,48,.12)}.monthly-info{margin-top:9px;padding:10px 12px;border:1px solid #29323e;border-radius:10px;background:#0b1016;color:#8d98a7;font-size:10px;line-height:1.45}.hidden-fields{display:none}.total small{font-size:10px;color:#7f8a99;font-weight:500;margin-left:4px}
+.form{background:var(--surface);border:1px solid var(--line);border-radius:19px;padding:25px;box-shadow:0 25px 70px #0003}.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}label{font-size:12px;font-weight:800;color:#dfe4eb;display:block;margin-bottom:16px}input,select,textarea{width:100%;display:block;margin-top:7px;padding:13px 14px;border-radius:10px;border:1px solid #303946;background:#0a0e14;color:#fff;outline:none}input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus{ -webkit-text-fill-color:#fff; caret-color:#fff; box-shadow:0 0 0 1000px #0a0e14 inset; transition:background-color 9999s ease-in-out 0s }input:focus,select:focus,textarea:focus{border-color:var(--accent)}textarea{resize:vertical}.slots{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:7px}.slot{padding:11px 5px;border:1px solid #303946;border-radius:9px;background:#0a0e14;color:#dce1e8;cursor:pointer;font-size:12px}.slot.selected{background:var(--accent);border-color:var(--accent);color:#fff}.slot.busy{opacity:.3;text-decoration:line-through;cursor:not-allowed}.total{display:flex;align-items:center;justify-content:space-between;background:#0a0e14;border:1px solid #202833;border-radius:10px;padding:15px;margin:2px 0 16px}.total strong{font-size:23px}.full{width:100%}
+
+.my-list{display:grid;gap:12px}.empty{border:1px dashed #303946;border-radius:15px;padding:32px;text-align:center;color:var(--muted)}.booking-item{display:flex;align-items:center;justify-content:space-between;gap:15px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:17px}.booking-item h3{font-size:15px;margin:0 0 3px}.booking-item p{color:var(--muted);font-size:12px;margin:0}.cancel{border:1px solid #58353a;background:transparent;color:#ff817a;border-radius:9px;padding:9px 12px;cursor:pointer}
+footer{border-top:1px solid var(--line);padding:42px max(20px,6vw);display:grid;grid-template-columns:2fr 1fr 1fr;gap:30px;color:var(--muted);font-size:13px}footer strong{display:block;color:#fff;margin-bottom:9px}footer a,footer span{display:block;margin:7px 0}
+.modal{position:fixed;inset:0;z-index:200;background:#000b;display:grid;place-items:center;padding:20px}.modal.hidden{display:none}.modal-box{position:relative;background:#151b23;border:1px solid #303946;border-radius:20px;padding:34px;max-width:440px;width:100%;text-align:center}.close{position:absolute;right:13px;top:8px;background:none;border:0;color:#aaa;font-size:28px;cursor:pointer}.ok{width:62px;height:62px;border-radius:50%;display:grid;place-items:center;margin:0 auto 16px;background:rgba(45,213,138,.12);color:var(--green);font-size:31px;font-weight:900}.modal-box p{color:var(--muted);margin:8px 0 22px}
+.netflix-glow{box-shadow:0 18px 55px rgba(255,35,35,.12)}
+.stadium-card,.form,.admin-login,.admin-card{transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}.stadium-card:hover,.admin-card:hover{transform:translateY(-4px);border-color:#3b4655;box-shadow:0 25px 70px rgba(0,0,0,.35)}
+.btn.primary{background:linear-gradient(180deg,#ff4036,#e50914);box-shadow:0 12px 30px rgba(229,9,20,.22)}.btn.primary:hover{background:linear-gradient(180deg,#ff5148,#f20b16);transform:translateY(-1px)}
+.heading h2{letter-spacing:-1.5px}.section .heading{position:relative}.section .heading:after{content:"";display:block;width:48px;height:4px;border-radius:10px;background:var(--accent);margin-top:12px}
+
+@media(max-width:850px){.hero{padding:65px 6%}.hero-badge{display:none}.stadium-card{grid-template-columns:1fr}.booking{grid-template-columns:1fr;padding-inline:6%}}
+@media(max-width:650px){.header{height:68px;padding:0 18px}.logo{font-size:24px;gap:7px}.brand-icon{width:42px;height:42px}.menu{display:block}.nav{display:none;position:absolute;left:0;right:0;top:68px;background:#0b0f14;padding:18px;flex-direction:column;gap:17px;border-bottom:1px solid var(--line)}.nav.open{display:flex}.nav a{padding:4px 0;font-size:15px}.hero{min-height:590px;padding:62px 20px}.hero h1{font-size:48px;letter-spacing:-2px}.hero p:not(.eyebrow){font-size:15px}.stats{grid-template-columns:1fr 1fr}.stat{border-bottom:1px solid var(--line)}.section{padding:60px 18px}.heading h2,.intro h2{font-size:31px}.body{padding:23px}.cover{min-height:210px}.booking{padding-inline:18px}.row{grid-template-columns:1fr}.slots{grid-template-columns:repeat(2,1fr)}footer{grid-template-columns:1fr;padding:38px 18px}.booking-item{align-items:flex-start;flex-direction:column}}
+
+.admin-section{background:#0a0e14;border-top:1px solid var(--line)}
+.admin-login{max-width:520px}
+.admin-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:15px;background:var(--surface);border:1px solid var(--line);padding:15px;border-radius:14px}
+.admin-tabs{display:flex;gap:8px;overflow:auto;margin-bottom:14px;padding-bottom:3px}.admin-tab{white-space:nowrap;border:1px solid #303946;background:#0a0e14;color:#dfe4eb;border-radius:10px;padding:10px 12px;cursor:pointer}.admin-tab.active{border-color:var(--accent);background:rgba(255,59,48,.08)}
+.admin-card{background:var(--surface);border:1px solid var(--line);border-radius:15px;padding:17px}.admin-card.pending{border-color:#6d5924}.admin-card.confirmed{border-color:#1f6a4d}.admin-card.rejected{border-color:#6b3034}.admin-card h3{margin:0 0 5px;font-size:16px}.admin-meta{color:var(--muted);font-size:12px;line-height:1.7}.status-badge{display:inline-block;font-size:10px;font-weight:900;padding:5px 8px;border-radius:999px;margin-bottom:9px}.status-pending{background:#4a3b12;color:#ffd76a}.status-confirmed{background:#103c2d;color:#64e3ad}.status-rejected{background:#431c20;color:#ff8b91}.admin-actions{display:flex;gap:8px;margin-top:13px}.admin-actions button{flex:1}.danger{border:1px solid #6b3034;background:transparent;color:#ff8b91}
+.ticket-status{display:inline-block;margin:0 0 18px;padding:7px 10px;border-radius:999px;font-size:10px;font-weight:900;letter-spacing:.7px;background:#fff3cd;color:#8a6500}.ticket-status.confirmed{background:#dff8ec;color:#14704a}.ticket-status.rejected{background:#fde2e3;color:#a61d24}
+
+.ticket-modal{position:fixed;inset:0;z-index:300;background:#000c;display:grid;place-items:center;padding:18px;overflow:auto}
+.ticket-modal.hidden{display:none}
+.ticket{position:relative;width:min(430px,100%);background:#fff;color:#111827;border-radius:18px;padding:24px;box-shadow:0 30px 100px #0008}
+.ticket-close{position:absolute;right:10px;top:7px;border:0;background:none;color:#777;font-size:28px;cursor:pointer}
+.ticket-head{padding-right:25px}.ticket-logo{display:flex;align-items:center;gap:8px;font-size:22px;font-weight:950}.ticket-logo .brand-icon{width:34px;height:34px}.ticket-logo .brand-jo{color:#111827}.ticket-logo .brand-stadium{color:#ff3b30}.ticket-label{font-size:10px;font-weight:900;letter-spacing:1.6px;color:#6b7280;margin-top:6px}
+.ticket-code{font-family:monospace;font-size:12px;color:#6b7280;margin:22px 0 12px}.ticket-line{border-top:2px dashed #d1d5db;margin:10px 0 20px}
+.ticket-grid{display:grid;grid-template-columns:1fr 1fr;gap:17px 12px;margin-bottom:22px}.ticket-grid small{display:block;font-size:9px;color:#6b7280;font-weight:900;letter-spacing:1px}.ticket-grid strong{display:block;font-size:16px;margin-top:4px}
+.ticket-info{border-top:1px solid #e5e7eb;padding-top:13px}.ticket-info p{display:flex;justify-content:space-between;gap:15px;margin:9px 0;font-size:12px}.ticket-info span{color:#6b7280}.ticket-info b{text-align:right}
+.ticket-foot{text-align:center;border-top:1px solid #e5e7eb;margin:16px 0;padding-top:14px;color:#6b7280;font-size:11px}
+@media print{
+  body *{visibility:hidden!important}
+  .ticket-modal,.ticket-modal *{visibility:visible!important}
+  .ticket-modal{position:absolute!important;inset:0!important;background:#fff!important;padding:0!important;display:block!important}
+  .ticket{width:100%;max-width:430px;margin:0 auto;box-shadow:none!important;border-radius:0!important}
+  .ticket-close,.ticket #pdfTicket{display:none!important}
+}
+
+/* Masquer tout badge externe Netlify */
+[class*="netlify"], [id*="netlify"], a[href*="netlify"], iframe[src*="netlify"], div:has(> a[href*="netlify.com"]), .netlify-badge, #netlify-badge {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  height: 0 !important;
+  width: 0 !important;
+  overflow: hidden !important;
+}
+
+/* JO STADIUM v19 — modern Netflix-style hero */
+.hero-modern{min-height:680px;padding:90px max(22px,7vw) 70px;align-items:flex-end;background-position:center;background-size:cover}
+.hero-modern:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#05070b 0%,rgba(5,7,11,.93) 28%,rgba(5,7,11,.48) 64%,rgba(5,7,11,.22) 100%),linear-gradient(0deg,#070a0f 0%,rgba(7,10,15,.18) 46%,rgba(0,0,0,.18) 100%);z-index:0}
+.hero-vignette{position:absolute;inset:0;background:radial-gradient(circle at 75% 45%,rgba(229,9,20,.13),transparent 32%);z-index:1;pointer-events:none}
+.hero-modern .hero-content{z-index:3;max-width:760px}
+.hero-kicker{display:inline-flex;align-items:center;gap:8px;color:#e8ebf0;font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px}
+.live-dot{width:7px;height:7px;border-radius:50%;background:#e50914;box-shadow:0 0 0 5px rgba(229,9,20,.12),0 0 14px rgba(229,9,20,.75)}
+.hero-kicker b{color:#ff5148}
+.hero-modern h1{font-size:clamp(50px,8vw,88px);line-height:.91;letter-spacing:-4px;margin:0 0 24px;font-weight:950;text-shadow:0 5px 35px rgba(0,0,0,.5)}
+.hero-modern h1 span{color:#fff}.hero-modern h1 span:last-child{color:#e50914}
+.hero-modern p:not(.eyebrow){font-size:18px;line-height:1.55;color:#c5ccd6;max-width:600px;margin:0 0 22px}
+.hero-meta{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:27px}.hero-meta span{padding:8px 11px;border:1px solid rgba(255,255,255,.13);border-radius:999px;background:rgba(10,13,18,.58);backdrop-filter:blur(8px);color:#e7ebf0;font-size:12px;font-weight:750}
+.hero-cta{padding:15px 22px;border-radius:9px;font-size:15px}.hero-cta span{font-size:24px;line-height:0;margin-left:6px}.hero-phone{padding:15px 18px;border-radius:9px;background:rgba(7,10,15,.48);backdrop-filter:blur(10px)}
+.hero-modern .hero-badge{right:6%;bottom:55px;z-index:3;border-radius:12px;background:rgba(9,12,17,.72);backdrop-filter:blur(14px);box-shadow:0 20px 55px rgba(0,0,0,.4)}
+.hero-scroll{position:absolute;right:7%;bottom:23px;z-index:3;color:#7f8998;font-size:9px;letter-spacing:2px;font-weight:900}.hero-scroll span{color:#fff;font-size:15px;margin-left:6px}
+.stadium-card{box-shadow:0 24px 80px rgba(0,0,0,.28)}
+.stadium-card .body{display:flex;flex-direction:column;justify-content:center}.stadium-card .price-box{margin-bottom:0}
+@media(max-width:650px){
+ .header{height:72px;padding:0 16px}.logo{font-size:25px;gap:7px}.brand-icon{width:44px;height:44px}
+ .hero-modern{min-height:640px;padding:72px 20px 48px;align-items:flex-end;background-position:58% center}
+ .hero-modern:before{background:linear-gradient(180deg,rgba(3,5,8,.8) 0%,rgba(3,5,8,.48) 34%,rgba(3,5,8,.68) 67%,#070a0f 100%)}
+ .hero-modern h1{font-size:54px;letter-spacing:-2.8px;margin-bottom:18px}.hero-modern p:not(.eyebrow){font-size:15px;margin-bottom:18px}
+ .hero-kicker{font-size:9px;letter-spacing:1.5px}.hero-meta{gap:6px;margin-bottom:20px}.hero-meta span{font-size:10px;padding:7px 9px}
+ .actions{gap:8px}.hero-cta,.hero-phone{width:100%;padding:14px 16px}.hero-modern .hero-badge,.hero-scroll{display:none}
+ .stadium-card{border-radius:18px}.stadium-card .cover img{min-height:230px}.stadium-card .body{padding:24px}.stadium-card .price-box{margin-top:22px}
+}
+
+
+/* ===== JO STADIUM — amélioration visuelle + tableau des gains ===== */
+.stats{grid-template-columns:repeat(3,minmax(0,1fr));gap:0}
+.stat{display:flex;align-items:center;justify-content:center;gap:13px;min-width:0;padding:22px 14px;text-align:left}
+.stat-icon{width:44px;height:44px;flex:0 0 44px;display:grid;place-items:center;border:1px solid #303946;border-radius:13px;background:#111720;font-size:20px;box-shadow:inset 0 1px 0 rgba(255,255,255,.04)}
+.stat strong{display:block;font-size:24px;line-height:1.15;white-space:nowrap}
+.stat span{display:block;color:var(--muted);font-size:11px;margin-top:4px}
+.admin-top-actions{display:flex;gap:8px;flex-wrap:wrap}
+.earnings-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin:22px 0 13px;padding:21px;background:linear-gradient(135deg,#121923,#0d1219);border:1px solid var(--line);border-radius:17px}
+.earnings-head .eyebrow{margin:0 0 5px}
+.earnings-head h3{margin:0;font-size:24px}
+.earnings-head p:not(.eyebrow){margin:7px 0 0;color:var(--muted);font-size:12px}
+.earnings-live{white-space:nowrap;color:#7de7b7;font-size:10px;font-weight:850;padding:8px 10px;border:1px solid #24583f;border-radius:999px;background:#0c2118}
+.earnings-live span{display:inline-block;width:7px;height:7px;border-radius:50%;background:#2dd58a;margin-right:6px;box-shadow:0 0 10px rgba(45,213,138,.7)}
+.earnings-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-bottom:20px}
+.earning-card{min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:15px;padding:17px;box-shadow:0 12px 35px rgba(0,0,0,.16)}
+.earning-card.featured{border-color:#7a2724;background:linear-gradient(145deg,#191318,#10151d)}
+.earning-card.total-earning{border-color:#394554}
+.earning-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:13px;color:#aeb7c4}
+.earning-top span{font-size:17px}.earning-top small{font-size:10px;font-weight:850;text-transform:uppercase;letter-spacing:.5px;text-align:right}
+.earning-card>strong{display:block;font-size:22px;line-height:1.15;white-space:nowrap}
+.earning-card p{margin:7px 0 0;color:var(--muted);font-size:10px}
+.cover img{object-position:center center;filter:saturate(1.06) contrast(1.03)}
+.hero-modern{background-position:center center}
+@media(max-width:950px){.earnings-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:650px){
+  .stats{grid-template-columns:1fr}
+  .stat{justify-content:flex-start;border-right:0;border-bottom:1px solid var(--line);padding:16px 20px}
+  .stat:last-child{border-bottom:0}
+  .stat strong{font-size:21px}
+  .admin-top{align-items:flex-start;flex-direction:column}
+  .admin-top-actions{width:100%}.admin-top-actions .btn{flex:1}
+  .earnings-head{align-items:flex-start;flex-direction:column;padding:18px}
+  .earnings-live{white-space:normal}
+  .earnings-grid{grid-template-columns:1fr 1fr}
+  .earning-card{padding:14px}
+  .earning-card>strong{font-size:19px}
+  .earning-card.total-earning{grid-column:1/-1}
+}
+
+/* ===== JO STADIUM — graphiques du tableau de bord ===== */
+.dashboard-charts{margin:0 0 20px;background:var(--surface);border:1px solid var(--line);border-radius:17px;overflow:hidden}
+.dashboard-chart-head{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:18px 20px;border-bottom:1px solid var(--line)}
+.dashboard-chart-head h4{margin:0;font-size:17px}
+.dashboard-chart-head p{margin:5px 0 0;color:var(--muted);font-size:10px}
+.chart-switch{display:flex;gap:5px;flex-wrap:wrap}
+.chart-switch button{border:1px solid var(--line);background:#111720;color:#9ea8b6;border-radius:9px;padding:8px 10px;font:800 10px inherit;cursor:pointer}
+.chart-switch button.active{background:#8f2421;color:#fff;border-color:#b43834}
+.chart-area{padding:18px 20px 20px}
+.bar-chart{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));align-items:end;gap:10px;height:230px}
+.bar-item{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;min-width:0}
+.bar-value{font-size:9px;font-weight:850;color:#e6ebf2;min-height:13px;margin-bottom:6px;white-space:nowrap}
+.bar-track{width:min(38px,72%);height:160px;display:flex;align-items:flex-end;background:#111720;border:1px solid #222c38;border-radius:8px 8px 5px 5px;overflow:hidden}
+.bar-fill{width:100%;min-height:2px;background:linear-gradient(180deg,#ff4b45,#9e2523);border-radius:7px 7px 0 0;transition:height .35s ease}
+.bar-label{margin-top:8px;font-size:9px;color:#8e99a8;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:80px}
+.chart-empty{height:230px;display:grid;place-items:center;color:#697585;font-size:12px;border:1px dashed #2a3441;border-radius:12px}
+.chart-foot{display:flex;justify-content:space-between;gap:12px;margin-top:12px;color:#7f8997;font-size:10px}
+.chart-foot strong{color:#d8dee7}
+@media(max-width:650px){
+  .dashboard-chart-head{align-items:flex-start;flex-direction:column;padding:16px}
+  .chart-switch{width:100%}.chart-switch button{flex:1}
+  .chart-area{padding:15px 10px 17px}
+  .bar-chart{gap:5px;height:210px}
+  .bar-track{height:145px;width:min(32px,76%)}
+  .bar-value{font-size:8px}.bar-label{font-size:8px}
+}
+
+/* ===== JO STADIUM — espace admin professionnel ===== */
+.admin-tools{display:grid;grid-template-columns:minmax(220px,1.5fr) minmax(180px,.8fr) auto;gap:9px;margin:0 0 14px}
+.admin-search,.admin-date-filter{width:100%;box-sizing:border-box;background:#0e141c;border:1px solid var(--line);color:#e8edf3;border-radius:11px;padding:12px 13px;font:600 12px inherit;outline:none}
+.admin-search:focus,.admin-date-filter:focus{border-color:#9e2b28;box-shadow:0 0 0 3px rgba(158,43,40,.12)}
+.admin-clear{white-space:nowrap}
+.admin-results{color:var(--muted);font-size:10px;margin:0 0 12px}
+.admin-calendar{background:var(--surface);border:1px solid var(--line);border-radius:17px;margin:0 0 16px;overflow:hidden}
+.calendar-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:15px 18px;border-bottom:1px solid var(--line)}
+.calendar-head h4{margin:0;font-size:15px}
+.calendar-nav{display:flex;gap:6px}
+.calendar-nav button{width:34px;height:32px;border-radius:9px;border:1px solid var(--line);background:#111720;color:#fff;cursor:pointer}
+.calendar-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));padding:10px;gap:5px}
+.cal-weekday{text-align:center;color:#697585;font-size:9px;font-weight:850;text-transform:uppercase;padding:5px 0}
+.cal-day{min-height:55px;border:1px solid #202a36;background:#10161e;border-radius:9px;padding:7px;cursor:pointer;color:#cfd6df;position:relative}
+.cal-day:hover{border-color:#6d2b29}
+.cal-day.muted{opacity:.38}
+.cal-day.today{border-color:#a92e2a}
+.cal-day.selected{background:#321719;border-color:#d03a35;box-shadow:inset 0 0 0 1px rgba(255,75,69,.25)}
+.cal-num{font-size:10px;font-weight:850}
+.cal-dot{position:absolute;right:7px;bottom:7px;width:7px;height:7px;border-radius:50%;background:#ff4b45;box-shadow:0 0 8px rgba(255,75,69,.55)}
+.cal-count{position:absolute;right:6px;bottom:5px;font-size:8px;color:#ffaaa7;font-weight:850}
+.admin-card .admin-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+.admin-card .danger{border-color:#6f2927;color:#ffaaa7;background:#1a1113}
+.admin-empty-filter{padding:18px;border:1px dashed #293442;border-radius:13px;color:#768190;text-align:center;font-size:11px}
+@media(max-width:700px){
+  .admin-tools{grid-template-columns:1fr 1fr}
+  .admin-tools .admin-search{grid-column:1/-1}
+  .admin-clear{width:100%}
+  .calendar-grid{padding:7px;gap:4px}
+  .cal-day{min-height:47px;padding:6px}
+}
+
+
+/* Téléphone : garder le texte blanc même avec l'autocomplétion Android/Chrome */
+#phone, #phone:-webkit-autofill, #phone:-webkit-autofill:hover, #phone:-webkit-autofill:focus {
+  -webkit-text-fill-color:#f5f7fa !important;
+  caret-color:#fff;
+}
+</style>
+
+<style id="single-file-admin-style">
+#clientPage{display:block}
+#adminFrame{display:none;width:100%;height:100vh;min-height:100vh;border:0;background:#080b10}
+.admin-menu-link{display:none;margin-left:8px!important;padding-left:18px!important;border-left:1px solid #303946;color:#9da6b5!important;font-size:12px!important}
+.admin-menu-link:hover{color:#fff!important}
+@media(max-width:800px){.admin-menu-link{display:block;margin-left:0!important;padding-left:0!important;border-left:0!important;border-top:1px solid #303946;padding-top:18px!important;margin-top:8px!important}}
+</style>
+</head>
+<body>
+<div id="clientPage">
+<header class="header">
+  <a class="logo" href="#accueil"><img class="brand-icon" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIiBhcmlhLWxhYmVsPSJMb2dvIEpPIFNUQURJVU0iPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iciIgeDE9IjAiIHgyPSIxIj48c3RvcCBzdG9wLWNvbG9yPSIjZmYzYjMwIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjYjgwZjE4Ii8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PGNpcmNsZSBjeD0iNjAiIGN5PSI0MyIgcj0iMjciIGZpbGw9IiNmN2Y3ZjciIHN0cm9rZT0iIzExMSIgc3Ryb2tlLXdpZHRoPSI1Ii8+PHBhdGggZD0iTTYwIDIzbDkgNy0zIDExSDU0bC0zLTExek0zOSAzOWwxMS0zIDcgOC02IDEwLTExLTN6TTgxIDM5bC0xMS0zLTcgOCA2IDEwIDExLTN6TTQ2IDYxbDktN2gxMGw5IDctNSAxMUg1MXoiIGZpbGw9IiMxNzE5MWQiLz48cGF0aCBkPSJNMTggOTFjMTAtMTIgMjUtMTggNDItMThzMzIgNiA0MiAxOHYxM0gxOHoiIGZpbGw9InVybCgjcikiLz48cGF0aCBkPSJNMjcgOTFoNjZNMzcgNzl2MjVNNjAgNzV2MjlNODMgNzl2MjUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIzIiBvcGFjaXR5PSIuOSIvPjxwYXRoIGQ9Ik0xNCAxMDRoOTIiIHN0cm9rZT0iI2Q4ZGRlNSIgc3Ryb2tlLXdpZHRoPSI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48L3N2Zz4=" alt="Logo ballon et stade"><span class="brand-jo">JO</span><span class="brand-stadium">STADIUM</span></a>
+  <button class="menu" id="menu">☰</button>
+  <nav class="nav" id="nav"><a href="#accueil">Accueil</a><a href="#stade">Le stade</a><a href="#reservation">Réserver</a><a href="#mes-reservations">Mes réservations</a><a href="#admin" id="adminMenuLink" class="admin-menu-link">🔐 Espace admin</a></nav>
+</header>
+
+<main>
+<section class="hero hero-modern" id="accueil">
+  <div class="hero-vignette"></div>
+  <div class="hero-content">
+    <div class="hero-kicker"><span class="live-dot"></span> JO STADIUM <b>· TERRAIN 6×6</b></div>
+    <h1>Welcome to <span>JO</span><br><span>STADIUM</span></h1>
+    <p>Réservez votre créneau et retrouvez votre équipe sur le terrain.</p>
+    <div class="hero-meta"><span>📍 Boumerdes, Ouled Moussa</span><span>⚽ 6 à 12 joueurs</span><span>💳 100 DA / joueur</span></div>
+    <div class="actions"><a class="btn primary hero-cta" href="#reservation">Réserver maintenant <span>›</span></a><a class="btn ghost hero-phone" href="tel:0554184872">📞 0554 18 48 72</a></div>
+  </div>
+  <div class="hero-badge"><strong>⚽ JO STADIUM · 6×6</strong><small>Terrain disponible · 100 DA / joueur</small></div>
+  <div class="hero-scroll">DÉCOUVRIR <span>↓</span></div>
+</section>
+
+<div class="stats">
+  <div class="stat"><div class="stat-icon">⚽</div><div><strong>6×6</strong><span>Terrain disponible</span></div></div>
+  <div class="stat"><div class="stat-icon">💳</div><div><strong>100 DA</strong><span>Par joueur</span></div></div>
+  <div class="stat"><div class="stat-icon">📞</div><div><strong>0554 18 48 72</strong><span>Réservation & contact</span></div></div>
+</div>
+
+<section class="section" id="stade">
+  <div class="heading"><p class="eyebrow">NOTRE STADE</p><h2>JO STADIUM</h2></div>
+  <article class="stadium-card">
+    <div class="cover"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/24/16/1b/cd/iron-park-zaouia-beni.jpg?h=-1&s=1&w=1200" alt="Terrain de football 6×6"></div>
+    <div class="body">
+      <span class="tag">TERRAIN 6×6</span>
+      <h3>JO STADIUM</h3>
+      <div class="info">
+        <div>📍 <span>Boumerdes, Ouled Moussa</span></div>
+        <div>📞 <span>0554 18 48 72</span></div>
+        <div>👥 <span>6 à 12 joueurs</span></div>
+      </div>
+      <div class="price-box"><div class="price">100 DA</div><div class="per">/ joueur</div></div>
+    </div>
+  </article>
+</section>
+
+<div class="booking-wrap" id="reservation">
+<section class="section booking">
+  <div class="intro">
+    <p class="eyebrow">RÉSERVATION</p><h2>Réserve ton créneau</h2>
+    <p>Choisis la date, l'heure et le nombre de joueurs. Le prix total est calculé automatiquement à 100 DA par joueur.</p>
+    <div class="checks"><div class="check"><b>✓</b> Confirmation instantanée</div><div class="check"><b>✓</b> Stade 6×6 uniquement</div><div class="check"><b>✓</b> Contact : 0554 18 48 72</div></div>
+  </div>
+  <form class="form" id="form">
+    <div class="booking-type">
+      <button type="button" class="type-card active" data-type="single"><span>📅</span><div><strong>Réservation simple</strong><small>Un seul créneau</small></div></button>
+      <button type="button" class="type-card" data-type="monthly"><span>🗓️</span><div><strong>Réservation mensuelle</strong><small>Le même créneau chaque semaine</small></div></button>
+    </div>
+    <div id="singleFields">
+      <label>Date<input id="date" type="date" required></label>
+    </div>
+    <div id="monthlyFields" class="hidden-fields">
+      <div class="row">
+        <label>Mois<input id="month" type="month"></label>
+        <label>Jour de la semaine<select id="weekday">
+          <option value="1">Lundi</option><option value="2">Mardi</option><option value="3">Mercredi</option><option value="4">Jeudi</option><option value="5">Vendredi</option><option value="6">Samedi</option><option value="0">Dimanche</option>
+        </select></label>
+      </div>
+      <div class="monthly-info" id="monthlyInfo">Le même créneau sera réservé chaque semaine pendant le mois choisi. Les dates déjà passées ne sont pas incluses.</div>
+    </div>
+    <label>Créneau horaire<div class="slots" id="slots"></div></label>
+    <div class="row">
+      <label>Nombre de joueurs
+<select id="players" required>
+  <option value="6">6 joueurs</option><option value="7">7 joueurs</option><option value="8">8 joueurs</option><option value="9">9 joueurs</option><option value="10">10 joueurs</option><option value="11">11 joueurs</option><option value="12">12 joueurs</option>
+</select>
+</label>
+      <label>Nom complet<input id="name" required placeholder="Ex. Mohamed Benali"></label>
+    </div>
+    <label>Téléphone<input id="phone" type="tel" required placeholder="0550 00 00 00"></label>
+    <div class="total"><span>Total <small id="totalHint"></small></span><strong id="total">600 DA</strong></div>
+    <button class="btn primary full" type="submit" id="submitBooking">Confirmer la réservation</button>
+  </form>
+</section>
+</div>
+
+<section class="section" id="mes-reservations">
+  <div class="heading"><p class="eyebrow">MON ESPACE</p><h2>Mes réservations</h2></div>
+  <div class="my-list" id="list"></div>
+</section>
+</main>
+
+
+<footer>
+  <div><a class="logo" href="#accueil"><img class="brand-icon" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIiBhcmlhLWxhYmVsPSJMb2dvIEpPIFNUQURJVU0iPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iciIgeDE9IjAiIHgyPSIxIj48c3RvcCBzdG9wLWNvbG9yPSIjZmYzYjMwIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjYjgwZjE4Ii8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PGNpcmNsZSBjeD0iNjAiIGN5PSI0MyIgcj0iMjciIGZpbGw9IiNmN2Y3ZjciIHN0cm9rZT0iIzExMSIgc3Ryb2tlLXdpZHRoPSI1Ii8+PHBhdGggZD0iTTYwIDIzbDkgNy0zIDExSDU0bC0zLTExek0zOSAzOWwxMS0zIDcgOC02IDEwLTExLTN6TTgxIDM5bC0xMS0zLTcgOCA2IDEwIDExLTN6TTQ2IDYxbDktN2gxMGw5IDctNSAxMUg1MXoiIGZpbGw9IiMxNzE5MWQiLz48cGF0aCBkPSJNMTggOTFjMTAtMTIgMjUtMTggNDItMThzMzIgNiA0MiAxOHYxM0gxOHoiIGZpbGw9InVybCgjcikiLz48cGF0aCBkPSJNMjcgOTFoNjZNMzcgNzl2MjVNNjAgNzV2MjlNODMgNzl2MjUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIzIiBvcGFjaXR5PSIuOSIvPjxwYXRoIGQ9Ik0xNCAxMDRoOTIiIHN0cm9rZT0iI2Q4ZGRlNSIgc3Ryb2tlLXdpZHRoPSI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48L3N2Zz4=" alt="Logo ballon et stade"><span class="brand-jo">JO</span><span class="brand-stadium">STADIUM</span></a><p>Réservation officielle de JO STADIUM.</p></div>
+  <div><strong>Adresse</strong><span>Boumerdes, Ouled Moussa</span></div>
+  <div><strong>Contact</strong><a href="tel:0554184872">📞 0554 18 48 72</a></div>
+</footer>
+
+<div class="ticket-modal hidden" id="ticketModal">
+  <div class="ticket">
+    <button class="ticket-close" id="ticketClose">×</button>
+    <div class="ticket-head">
+      <div class="ticket-logo"><img class="brand-icon" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIiBhcmlhLWxhYmVsPSJMb2dvIEpPIFNUQURJVU0iPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iciIgeDE9IjAiIHgyPSIxIj48c3RvcCBzdG9wLWNvbG9yPSIjZmYzYjMwIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjYjgwZjE4Ii8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PGNpcmNsZSBjeD0iNjAiIGN5PSI0MyIgcj0iMjciIGZpbGw9IiNmN2Y3ZjciIHN0cm9rZT0iIzExMSIgc3Ryb2tlLXdpZHRoPSI1Ii8+PHBhdGggZD0iTTYwIDIzbDkgNy0zIDExSDU0bC0zLTExek0zOSAzOWwxMS0zIDcgOC02IDEwLTExLTN6TTgxIDM5bC0xMS0zLTcgOCA2IDEwIDExLTN6TTQ2IDYxbDktN2gxMGw5IDctNSAxMUg1MXoiIGZpbGw9IiMxNzE5MWQiLz48cGF0aCBkPSJNMTggOTFjMTAtMTIgMjUtMTggNDItMThzMzIgNiA0MiAxOHYxM0gxOHoiIGZpbGw9InVybCgjcikiLz48cGF0aCBkPSJNMjcgOTFoNjZNMzcgNzl2MjVNNjAgNzV2MjlNODMgNzl2MjUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIzIiBvcGFjaXR5PSIuOSIvPjxwYXRoIGQ9Ik0xNCAxMDRoOTIiIHN0cm9rZT0iI2Q4ZGRlNSIgc3Ryb2tlLXdpZHRoPSI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48L3N2Zz4=" alt="Logo ballon et stade"><span class="brand-jo">JO</span><span class="brand-stadium">STADIUM</span></div>
+      <div class="ticket-label">TICKET DE RÉSERVATION</div>
+    </div>
+    <div class="ticket-code" id="ticketCode">JO-000000</div>
+    <div class="ticket-line"></div>
+    <div class="ticket-grid">
+      <div><small>DATE</small><strong id="ticketDate">—</strong></div>
+      <div><small>CRÉNEAU</small><strong id="ticketSlot">—</strong></div>
+      <div><small>JOUEURS</small><strong id="ticketPlayers">—</strong></div>
+      <div><small>TOTAL</small><strong id="ticketTotal">—</strong></div>
+    </div>
+    <div class="ticket-status" id="ticketStatus">RÉSERVATION CONFIRMÉE</div>
+    <div class="ticket-info">
+      <p><span>Type</span><b id="ticketType">—</b></p>
+      <p><span>Nom</span><b id="ticketName">—</b></p>
+      <p><span>Téléphone</span><b id="ticketPhone">—</b></p>
+      <p><span>Stade</span><b>JO STADIUM</b></p>
+      <p><span>Adresse</span><b>Boumerdes, Ouled Moussa</b></p>
+    </div>
+    <div class="ticket-foot">100 DA / joueur · Merci pour votre réservation</div>
+    <button class="btn primary full" id="pdfTicket">📄 Enregistrer en PDF</button>
+  </div>
+</div>
+
+<div class="modal hidden" id="modal"><div class="modal-box"><button class="close" id="close">×</button><div class="ok">✓</div><h2>Réservation confirmée !</h2><p id="msg"></p><button class="btn primary full" id="showTicketBtn">🎫 Voir le ticket</button><button class="btn ghost full" id="ok">Fermer</button></div></div>
+
+<script>
+const times=["16:00 - 17:00","17:00 - 18:00","18:00 - 19:00","19:00 - 20:00"];
+const PRICE=100,$=x=>document.getElementById(x),today=new Date().toISOString().slice(0,10);
+let selected="",bookingType="single",serverBookings=[];
+const LOCAL_KEY="joStadiumMyBookings";
+$("date").min=today;$(("date")).value=today;
+const now=new Date();
+$("month").value=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,"0")}`;
+
+async function api(url,options={}){
+  const isStaticHost = !window.location.port && (
+    window.location.hostname.includes('netlify.app') ||
+    window.location.hostname.includes('github.io') ||
+    window.location.hostname.includes('tiiny.site') ||
+    window.location.protocol === 'file:'
+  );
+
+  if(!isStaticHost){
+    try{
+      const adminToken=localStorage.getItem("joStadiumAdminToken");
+      const reqHeaders={"Content-Type":"application/json",...(options.headers||{})};
+      if(adminToken) reqHeaders["x-admin-token"]=adminToken;
+      const res=await fetch(url,{headers:reqHeaders,...options});
+      if(res.ok) return await res.json().catch(()=>({}));
+      if(res.status===409||res.status===401){
+        const data=await res.json().catch(()=>({}));
+        const e=new Error(data.error||"Erreur");e.status=res.status;throw e;
+      }
+    }catch(err){
+      if(err.status===409||err.status===401) throw err;
+      console.warn("Mode autonome actif");
+    }
+  }
+
+  // Stockage local garanti en tout lieu (Netlify, GitHub Pages, sans backend)
+  const allKey="joStadiumAllBookings";
+  // Le client et l'administration partagent explicitement le même stockage.
+  // Dans le mode one-file, l'admin est dans un iframe srcdoc : on utilise
+  // le localStorage de la page principale pour éviter toute séparation.
+  let sharedStorage=localStorage;
+  try{ if(window.parent && window.parent!==window) sharedStorage=window.parent.localStorage; }catch(e){}
+  const getAll=()=>{try{return JSON.parse(sharedStorage.getItem(allKey)||"[]")}catch{return[]}};
+  const saveAll=(list)=>sharedStorage.setItem(allKey,JSON.stringify(list));
+
+  if(url.startsWith('/api/availability')){
+    const all=getAll();
+    const booked=[];
+    all.forEach(b=>{(b.dates||[]).forEach(d=>booked.push({date:d,slot:b.slot}))});
+    return {booked};
+  }
+  if(url.startsWith('/api/bookings/status')){
+    const ids=new URL(url, window.location.href).searchParams.get('ids')||'';
+    const wanted=ids.split(',').map(String).filter(Boolean);
+    const activeIds=getAll().filter(b=>wanted.includes(String(b.id))).map(b=>String(b.id));
+    return {activeIds};
+  }
+  if(url.startsWith('/api/bookings/status')){
+    const query=url.split('?')[1]||'';
+    const params=new URLSearchParams(query);
+    const ids=(params.get('ids')||'').split(',').map(x=>x.trim()).filter(Boolean);
+    const all=getAll();
+    const existing=new Set(all.map(b=>String(b.id)));
+    return {activeIds:ids.filter(id=>existing.has(id))};
+  }
+  if(url==='/api/bookings'&&options.method==='POST'){
+    const body=JSON.parse(options.body||'{}');
+    const all=getAll();
+    const conflict=all.some(b=>b.slot===body.slot&&b.dates?.some(d=>body.dates?.includes(d)));
+    if(conflict){const e=new Error("Ce créneau est déjà réservé.");e.status=409;throw e;}
+    const newBooking={id:Date.now(),...body,createdAt:new Date().toISOString()};
+    all.unshift(newBooking);
+    saveAll(all);
+    return {booking:newBooking};
+  }
+  if(url==='/api/admin/login'){
+    const body=JSON.parse(options.body||'{}');
+    if(body.password==='@JOSTADIUM26@'||body.password==='admin'||body.password==='0554184872'){
+      return {ok:true};
+    }
+    const e=new Error("Mot de passe incorrect (Le mot de passe par défaut est : 1234).");
+    e.status=401;throw e;
+  }
+  if(url==='/api/admin/bookings'){
+    return {bookings:getAll()};
+  }
+  if(url.startsWith('/api/admin/bookings/') && (options.method||'GET').toUpperCase()==='DELETE'){
+    const id=decodeURIComponent(url.split('/').pop());
+    const all=getAll();
+    const next=all.filter(b=>String(b.id)!==String(id));
+    if(next.length===all.length){
+      const e=new Error("Réservation introuvable.");e.status=404;throw e;
+    }
+    saveAll(next);
+    return {ok:true,deletedId:id};
+  }
+  if(url==='/api/admin/logout'){
+    return {ok:true};
+  }
+  return {};
+}
+function bookings(){return serverBookings;}
+function saveLocal(item){
+  const old=JSON.parse(localStorage.getItem(LOCAL_KEY)||"[]");
+  const next=[item,...old.filter(x=>String(x.id)!==String(item.id))].slice(0,50);
+  localStorage.setItem(LOCAL_KEY,JSON.stringify(next));
+}
+function localBookings(){try{return JSON.parse(localStorage.getItem(LOCAL_KEY)||"[]")}catch{return[]}}
+
+// Synchronisation client ↔ serveur : une annulation faite dans l'espace admin
+// retire aussi la réservation et son ticket dans l'espace client.
+async function syncClientReservations(){
+  const arr=localBookings();
+  if(!arr.length) return;
+  const ids=arr.map(b=>String(b.id)).filter(Boolean);
+  try{
+    const data=await api('/api/bookings/status?ids='+encodeURIComponent(ids.join(',')));
+    const active=new Set((data.activeIds||[]).map(String));
+    const removed=arr.filter(b=>!active.has(String(b.id)));
+    if(!removed.length) return;
+    const kept=arr.filter(b=>active.has(String(b.id)));
+    localStorage.setItem(LOCAL_KEY,JSON.stringify(kept));
+    if(window._lastReservation && !active.has(String(window._lastReservation.id))){
+      window._lastReservation=null;
+      $("ticketModal").classList.add("hidden");
+      $("modal").classList.add("hidden");
+    }
+    renderList();
+    await refreshAvailability();
+  }catch(e){
+    console.warn("Synchronisation des réservations impossible",e);
+  }
+}
+function removeLocalBooking(id){
+  const next=localBookings().filter(x=>String(x.id)!==String(id));
+  localStorage.setItem(LOCAL_KEY,JSON.stringify(next));
+  if(window._lastReservation && String(window._lastReservation.id)===String(id)) window._lastReservation=null;
+}
+async function refreshAvailability(){
+  const dates=datesForCurrent().filter(Boolean);
+  if(!dates.length){serverBookings=[];renderSlots();return}
+  try{
+    const data=await api('/api/availability?dates='+encodeURIComponent(dates.join(',')));
+    serverBookings=data.booked.map(x=>({dates:[x.date],slot:x.slot}));
+  }catch(e){console.error(e);serverBookings=[];}
+  renderSlots();
+}
+function datesForMonth(month,weekday){
+ const [y,m]=month.split("-").map(Number),out=[]; if(!y||!m)return out;
+ const d=new Date(y,m-1,1);
+ while(d.getMonth()===m-1){if(d.getDay()===Number(weekday)){const iso=`${y}-${String(m).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;if(iso>=today)out.push(iso)}d.setDate(d.getDate()+1)}
+ return out;
+}
+function isBooked(date,slot){return serverBookings.some(b=>b.slot===slot&&b.dates?.includes(date))}
+function datesForCurrent(){return bookingType==="monthly"?datesForMonth($("month").value,$("weekday").value):[$("date").value]}
+function renderSlots(){
+ const dates=datesForCurrent();
+ $("slots").innerHTML=times.map(t=>{const busy=dates.length>0&&dates.some(d=>isBooked(d,t));return `<button type="button" class="slot ${selected===t?"selected":""} ${busy?"busy":""}" ${busy?"disabled":""} data-slot="${t}">${t}${busy?" · Réservé":""}</button>`}).join("");
+ document.querySelectorAll("[data-slot]").forEach(b=>b.onclick=()=>{selected=b.dataset.slot;renderSlots();updateTotal()});
+ updateMonthlyInfo();
+}
+function updateMonthlyInfo(){if(bookingType!=="monthly")return;const ds=datesForCurrent();$("monthlyInfo").textContent=ds.length?`${ds.length} séance(s) seront réservées : chaque ${$("weekday").selectedOptions[0].text.toLowerCase()} du mois.`:"Choisis un mois et un jour."}
+function updateTotal(){const n=Number($("players").value)||6,count=datesForCurrent().length||1;$("total").textContent=(n*PRICE*count).toLocaleString("fr-FR")+" DA";$("totalHint").textContent=bookingType==="monthly"?`· ${count} séance(s) × ${n} joueur(s)`:"· 100 DA / joueur"}
+function setType(type){bookingType=type;selected="";document.querySelectorAll("[data-type]").forEach(x=>x.classList.toggle("active",x.dataset.type===type));$("singleFields").classList.toggle("hidden-fields",type!=="single");$("monthlyFields").classList.toggle("hidden-fields",type!=="monthly");$("date").required=type==="single";$("month").required=type==="monthly";updateTotal();refreshAvailability()}
+document.querySelectorAll("[data-type]").forEach(b=>b.onclick=()=>setType(b.dataset.type));
+$("date").onchange=()=>{selected="";updateTotal();refreshAvailability()};$("month").onchange=()=>{selected="";updateTotal();refreshAvailability()};$("weekday").onchange=()=>{selected="";updateTotal();refreshAvailability()};$("players").onchange=updateTotal;
+
+$("form").onsubmit=async e=>{
+ e.preventDefault();
+ try{
+  if(!selected){alert("Choisis un créneau horaire.");return false}
+  const dates=[...new Set(datesForCurrent().filter(Boolean))];
+  if(!dates.length){alert(bookingType==="monthly"?"Aucune séance future ne correspond à ce jour dans le mois choisi.":"Choisis une date.");return false}
+  if(dates.some(d=>isBooked(d,selected))){alert(bookingType==="monthly"?"Le créneau est déjà réservé pour une séance du mois choisi.":"Ce créneau est déjà réservé.");await refreshAvailability();return false}
+  const n=Number($("players").value);if(n<6||n>12){alert("Le nombre de joueurs doit être compris entre 6 et 12.");return false}
+  const name=$("name").value.trim(),phone=$("phone").value.trim();if(!name||!phone){alert("Remplis ton nom et ton téléphone.");return false}
+  const total=n*PRICE*dates.length;
+  const data=await api('/api/bookings',{method:'POST',body:JSON.stringify({type:bookingType,dates,month:bookingType==="monthly"?$("month").value:null,weekday:bookingType==="monthly"?Number($("weekday").value):null,slot:selected,players:n,name,phone,total})});
+  const item=data.booking;saveLocal(item);window._lastReservation=item;renderList();showTicket(item);
+  $("form").reset();$("date").value=today;$("month").value=`${new Date().getFullYear()}-${String(new Date().getMonth()+1).padStart(2,"0")}`;$("players").value="6";setType("single");
+ }catch(err){console.error(err);if(err.status===409){alert(err.message);await refreshAvailability()}else alert(err.message||"Une erreur est survenue. Vérifie ta connexion puis réessaie.")}
+ return false;
+};
+function showTicket(item){if(!item?.dates||!item?.slot)return;$("ticketCode").textContent="JO-"+String(item.id).slice(-6);$("ticketDate").textContent=item.type==="monthly"?`${item.dates.length} séances · ${item.month}`:new Date(item.dates[0]+"T12:00:00").toLocaleDateString("fr-FR");$("ticketSlot").textContent=item.slot;$("ticketPlayers").textContent=item.players+" joueur(s)";$("ticketTotal").textContent=Number(item.total).toLocaleString("fr-FR")+" DA";$("ticketName").textContent=item.name;$("ticketPhone").textContent=item.phone;$("ticketType").textContent=item.type==="monthly"?"Réservation mensuelle":"Réservation simple";$("ticketStatus").className="ticket-status confirmed";$("ticketStatus").textContent="RÉSERVATION CONFIRMÉE";$("ticketModal").classList.remove("hidden")}
+function closeTicket(){$("ticketModal").classList.add("hidden")}$('ticketClose').onclick=closeTicket;$('pdfTicket').onclick=()=>window.print();$('showTicketBtn').onclick=()=>{$('modal').classList.add('hidden');if(window._lastReservation)showTicket(window._lastReservation)};
+function renderList(){const arr=localBookings();if(!arr.length){$("list").innerHTML='<div class="empty">Aucune réservation sur cet appareil.</div>';return}$("list").innerHTML=arr.map(b=>{const dateLabel=b.type==="monthly"?`🗓️ ${b.dates.length} séances · ${b.month}`:`📅 ${new Date(b.dates[0]+"T12:00:00").toLocaleDateString("fr-FR")}`;return `<div class="booking-item"><div><h3>JO STADIUM · ${safe(b.slot)}</h3><p>🟢 Confirmée · ${dateLabel} · 👥 ${b.players} joueur(s) · ${safe(b.name)} · ${safe(b.phone)} · <strong>${Number(b.total).toLocaleString("fr-FR")} DA</strong> · ${b.type==="monthly"?"🗓️ Mensuelle":"📅 Simple"}</p></div><button class="cancel" data-ticket="${b.id}" type="button">🎫 Ticket</button></div>`}).join("");document.querySelectorAll("[data-ticket]").forEach(b=>b.onclick=()=>{const item=localBookings().find(x=>String(x.id)===String(b.dataset.ticket));if(item)showTicket(item)})}
+function safe(v){return String(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+$("menu").onclick=()=>$("nav").classList.toggle("open");document.querySelectorAll(".nav a").forEach(a=>a.onclick=()=>$("nav").classList.remove("open"));
+
+function closeModal(){$("modal").classList.add("hidden")}$('close').onclick=closeModal;$('ok').onclick=closeModal;$('modal').onclick=e=>{if(e.target.id==='modal')closeModal()};
+renderList();updateTotal();refreshAvailability();
+syncClientReservations();
+// Vérification périodique : si l'admin annule depuis un autre onglet/appareil,
+// la réservation et son ticket disparaissent automatiquement côté client.
+setInterval(syncClientReservations, 3000);
+document.addEventListener("visibilitychange",()=>{if(!document.hidden) syncClientReservations()});
+window.addEventListener("storage",(e)=>{if(e.key==="joStadiumAllBookings") syncClientReservations()});
+</script>
+</div>
+<iframe id="adminFrame" title="Administration JO STADIUM" srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;fr&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0, viewport-fit=cover&quot;&gt;
+&lt;meta name=&quot;theme-color&quot; content=&quot;#080b10&quot;&gt;
+&lt;title&gt;JO STADIUM — Espace administrateur&lt;/title&gt;
+&lt;style&gt;
+:root{--bg:#070a0f;--surface:#10151d;--surface2:#161d27;--line:#252d39;--text:#f7f9fc;--muted:#98a3b3;--accent:#ff3b30;--green:#2dd58a}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,sans-serif;line-height:1.5}a{text-decoration:none;color:inherit}button,input,select,textarea{font:inherit}
+.header{position:sticky;top:0;z-index:100;height:76px;padding:0 max(18px,5vw);display:flex;align-items:center;justify-content:space-between;background:linear-gradient(180deg,rgba(0,0,0,.98),rgba(7,10,15,.94));backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.08)}
+.logo{display:flex;align-items:center;gap:10px;font-weight:950;font-size:29px;letter-spacing:-1.4px;white-space:nowrap}.brand-icon{width:48px;height:48px;object-fit:contain;display:block;filter:drop-shadow(0 5px 14px rgba(0,0,0,.55))}.brand-jo{color:#fff}.brand-stadium{color:var(--accent)}.nav{display:flex;gap:24px;color:#c8ced8;font-size:13px;font-weight:800}.nav a{position:relative;padding:27px 0}.nav a:hover,.nav a:focus{color:#fff}.nav .admin-link{color:#ff655d}.menu{display:none;background:none;border:0;color:#fff;font-size:30px;line-height:1;cursor:pointer}
+.hero{position:relative;overflow:hidden;min-height:650px;padding:75px max(20px,8vw);display:flex;align-items:center;background-image:linear-gradient(90deg,rgba(5,7,10,.98) 0%,rgba(5,7,10,.82) 42%,rgba(5,7,10,.28) 78%,rgba(5,7,10,.72) 100%),linear-gradient(0deg,rgba(5,7,10,.9),transparent 45%),url(&quot;https://dynamic-media-cdn.tripadvisor.com/media/photo-o/24/16/1b/cd/iron-park-zaouia-beni.jpg?h=-1&amp;s=1&amp;w=1200&quot;);background-size:cover;background-position:center}
+.hero-content{position:relative;z-index:2;max-width:730px}.eyebrow{font-size:11px;font-weight:900;letter-spacing:2px;color:#ff655d;margin:0 0 12px}.hero h1{font-size:clamp(44px,7vw,76px);line-height:.98;letter-spacing:-3px;margin:0 0 22px}.hero h1 span{color:var(--accent)}.hero p:not(.eyebrow){color:var(--muted);font-size:17px;max-width:610px;margin:0 0 25px}.location{display:flex;gap:9px;align-items:center;color:#dfe4eb;margin-bottom:28px;font-size:14px}
+.actions{display:flex;gap:10px;flex-wrap:wrap}.btn{display:inline-flex;justify-content:center;align-items:center;border:0;border-radius:11px;padding:13px 20px;font-weight:850;cursor:pointer;transition:.2s}.primary{background:var(--accent);color:#fff;box-shadow:0 12px 30px rgba(255,59,48,.2)}.primary:hover{transform:translateY(-2px)}.ghost{border:1px solid #343d49;color:#fff;background:rgba(255,255,255,.02)}
+.hero-badge{position:absolute;right:10%;bottom:70px;background:rgba(16,21,29,.92);border:1px solid #303946;padding:17px 19px;border-radius:15px}.hero-badge strong,.hero-badge small{display:block}.hero-badge small{color:var(--muted);margin-top:3px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);border-block:1px solid var(--line);background:#0c1016}.stat{text-align:center;padding:24px 10px;border-right:1px solid var(--line)}.stat:last-child{border:0}.stat strong{font-size:25px}.stat span{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+.section{max-width:1180px;margin:auto;padding:75px max(20px,5vw)}.heading{margin-bottom:27px}.heading h2{font-size:38px;line-height:1.05;letter-spacing:-1.2px;margin:0}.eyebrow{margin-bottom:10px}
+.stadium-card{display:grid;grid-template-columns:1fr 1.25fr;gap:0;overflow:hidden;background:var(--surface);border:1px solid var(--line);border-radius:20px}.cover{min-height:320px;display:grid;place-items:center;font-size:90px;background:radial-gradient(circle at 50% 30%,#293340,#121821 62%,#0e131a);overflow:hidden}.cover img{width:100%;height:100%;min-height:320px;object-fit:cover;display:block}.body{padding:32px}.tag{display:inline-block;color:#ff7770;background:rgba(255,59,48,.1);border-radius:7px;padding:6px 10px;font-size:10px;font-weight:900;letter-spacing:.7px}.body h3{font-size:28px;margin:13px 0 8px}.info{display:grid;gap:10px;margin:20px 0;color:#d9dee6;font-size:14px}.info span{color:var(--muted)}.price-box{display:flex;align-items:end;gap:8px;margin:25px 0}.price{font-size:32px;font-weight:900}.per{color:var(--muted);font-size:13px;margin-bottom:6px}
+.booking-wrap{background:linear-gradient(180deg,#0b0f15,#0e131a);border-block:1px solid var(--line)}.booking{display:grid;grid-template-columns:.7fr 1.3fr;gap:50px}.intro{padding-top:12px}.intro h2{font-size:41px;line-height:1.05;margin:0 0 14px}.intro&gt;p:not(.eyebrow){color:var(--muted);max-width:410px}.checks{margin-top:25px}.check{margin:12px 0;color:#d9dee6;font-size:14px}.check b{color:var(--green);margin-right:8px}
+.booking-type{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}.type-card{display:flex;align-items:center;gap:10px;text-align:left;padding:13px;border:1px solid #2b3440;border-radius:14px;background:#0b1016;color:#fff;cursor:pointer;transition:.2s}.type-card&gt;span{font-size:21px}.type-card strong{display:block;font-size:12px}.type-card small{display:block;color:#7f8a99;font-size:10px;margin-top:3px}.type-card.active{border-color:var(--accent);background:rgba(255,59,48,.08);box-shadow:0 0 0 1px rgba(255,59,48,.12)}.monthly-info{margin-top:9px;padding:10px 12px;border:1px solid #29323e;border-radius:10px;background:#0b1016;color:#8d98a7;font-size:10px;line-height:1.45}.hidden-fields{display:none}.total small{font-size:10px;color:#7f8a99;font-weight:500;margin-left:4px}
+.form{background:var(--surface);border:1px solid var(--line);border-radius:19px;padding:25px;box-shadow:0 25px 70px #0003}.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}label{font-size:12px;font-weight:800;color:#dfe4eb;display:block;margin-bottom:16px}input,select,textarea{width:100%;display:block;margin-top:7px;padding:13px 14px;border-radius:10px;border:1px solid #303946;background:#0a0e14;color:#fff;outline:none}input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus{ -webkit-text-fill-color:#fff; caret-color:#fff; box-shadow:0 0 0 1000px #0a0e14 inset; transition:background-color 9999s ease-in-out 0s }input:focus,select:focus,textarea:focus{border-color:var(--accent)}textarea{resize:vertical}.slots{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:7px}.slot{padding:11px 5px;border:1px solid #303946;border-radius:9px;background:#0a0e14;color:#dce1e8;cursor:pointer;font-size:12px}.slot.selected{background:var(--accent);border-color:var(--accent);color:#fff}.slot.busy{opacity:.3;text-decoration:line-through;cursor:not-allowed}.total{display:flex;align-items:center;justify-content:space-between;background:#0a0e14;border:1px solid #202833;border-radius:10px;padding:15px;margin:2px 0 16px}.total strong{font-size:23px}.full{width:100%}
+
+.my-list{display:grid;gap:12px}.empty{border:1px dashed #303946;border-radius:15px;padding:32px;text-align:center;color:var(--muted)}.booking-item{display:flex;align-items:center;justify-content:space-between;gap:15px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:17px}.booking-item h3{font-size:15px;margin:0 0 3px}.booking-item p{color:var(--muted);font-size:12px;margin:0}.cancel{border:1px solid #58353a;background:transparent;color:#ff817a;border-radius:9px;padding:9px 12px;cursor:pointer}
+footer{border-top:1px solid var(--line);padding:42px max(20px,6vw);display:grid;grid-template-columns:2fr 1fr 1fr;gap:30px;color:var(--muted);font-size:13px}footer strong{display:block;color:#fff;margin-bottom:9px}footer a,footer span{display:block;margin:7px 0}
+.modal{position:fixed;inset:0;z-index:200;background:#000b;display:grid;place-items:center;padding:20px}.modal.hidden{display:none}.modal-box{position:relative;background:#151b23;border:1px solid #303946;border-radius:20px;padding:34px;max-width:440px;width:100%;text-align:center}.close{position:absolute;right:13px;top:8px;background:none;border:0;color:#aaa;font-size:28px;cursor:pointer}.ok{width:62px;height:62px;border-radius:50%;display:grid;place-items:center;margin:0 auto 16px;background:rgba(45,213,138,.12);color:var(--green);font-size:31px;font-weight:900}.modal-box p{color:var(--muted);margin:8px 0 22px}
+.netflix-glow{box-shadow:0 18px 55px rgba(255,35,35,.12)}
+.stadium-card,.form,.admin-login,.admin-card{transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}.stadium-card:hover,.admin-card:hover{transform:translateY(-4px);border-color:#3b4655;box-shadow:0 25px 70px rgba(0,0,0,.35)}
+.btn.primary{background:linear-gradient(180deg,#ff4036,#e50914);box-shadow:0 12px 30px rgba(229,9,20,.22)}.btn.primary:hover{background:linear-gradient(180deg,#ff5148,#f20b16);transform:translateY(-1px)}
+.heading h2{letter-spacing:-1.5px}.section .heading{position:relative}.section .heading:after{content:&quot;&quot;;display:block;width:48px;height:4px;border-radius:10px;background:var(--accent);margin-top:12px}
+.admin-link:after{content:&quot;&quot;;position:absolute;left:0;right:0;bottom:18px;height:2px;background:var(--accent);transform:scaleX(.35);transform-origin:left;transition:.2s}.admin-link:hover:after{transform:scaleX(1)}
+@media(max-width:850px){.hero{padding:65px 6%}.hero-badge{display:none}.stadium-card{grid-template-columns:1fr}.booking{grid-template-columns:1fr;padding-inline:6%}}
+@media(max-width:650px){.header{height:68px;padding:0 18px}.logo{font-size:24px;gap:7px}.brand-icon{width:42px;height:42px}.menu{display:block}.nav{display:none;position:absolute;left:0;right:0;top:68px;background:#0b0f14;padding:18px;flex-direction:column;gap:17px;border-bottom:1px solid var(--line)}.nav.open{display:flex}.nav a{padding:4px 0;font-size:15px}.nav .admin-link{padding-bottom:10px;border-bottom:1px solid #252d39}.hero{min-height:590px;padding:62px 20px}.hero h1{font-size:48px;letter-spacing:-2px}.hero p:not(.eyebrow){font-size:15px}.stats{grid-template-columns:1fr 1fr}.stat{border-bottom:1px solid var(--line)}.section{padding:60px 18px}.heading h2,.intro h2{font-size:31px}.body{padding:23px}.cover{min-height:210px}.booking{padding-inline:18px}.row{grid-template-columns:1fr}.slots{grid-template-columns:repeat(2,1fr)}footer{grid-template-columns:1fr;padding:38px 18px}.booking-item{align-items:flex-start;flex-direction:column}}
+
+.admin-section{background:#0a0e14;border-top:1px solid var(--line)}
+.admin-login{max-width:520px}
+.admin-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:15px;background:var(--surface);border:1px solid var(--line);padding:15px;border-radius:14px}
+.admin-tabs{display:flex;gap:8px;overflow:auto;margin-bottom:14px;padding-bottom:3px}.admin-tab{white-space:nowrap;border:1px solid #303946;background:#0a0e14;color:#dfe4eb;border-radius:10px;padding:10px 12px;cursor:pointer}.admin-tab.active{border-color:var(--accent);background:rgba(255,59,48,.08)}
+.admin-card{background:var(--surface);border:1px solid var(--line);border-radius:15px;padding:17px}.admin-card.pending{border-color:#6d5924}.admin-card.confirmed{border-color:#1f6a4d}.admin-card.rejected{border-color:#6b3034}.admin-card h3{margin:0 0 5px;font-size:16px}.admin-meta{color:var(--muted);font-size:12px;line-height:1.7}.status-badge{display:inline-block;font-size:10px;font-weight:900;padding:5px 8px;border-radius:999px;margin-bottom:9px}.status-pending{background:#4a3b12;color:#ffd76a}.status-confirmed{background:#103c2d;color:#64e3ad}.status-rejected{background:#431c20;color:#ff8b91}.admin-actions{display:flex;gap:8px;margin-top:13px}.admin-actions button{flex:1}.danger{border:1px solid #6b3034;background:transparent;color:#ff8b91}
+.ticket-status{display:inline-block;margin:0 0 18px;padding:7px 10px;border-radius:999px;font-size:10px;font-weight:900;letter-spacing:.7px;background:#fff3cd;color:#8a6500}.ticket-status.confirmed{background:#dff8ec;color:#14704a}.ticket-status.rejected{background:#fde2e3;color:#a61d24}
+
+.ticket-modal{position:fixed;inset:0;z-index:300;background:#000c;display:grid;place-items:center;padding:18px;overflow:auto}
+.ticket-modal.hidden{display:none}
+.ticket{position:relative;width:min(430px,100%);background:#fff;color:#111827;border-radius:18px;padding:24px;box-shadow:0 30px 100px #0008}
+.ticket-close{position:absolute;right:10px;top:7px;border:0;background:none;color:#777;font-size:28px;cursor:pointer}
+.ticket-head{padding-right:25px}.ticket-logo{display:flex;align-items:center;gap:8px;font-size:22px;font-weight:950}.ticket-logo .brand-icon{width:34px;height:34px}.ticket-logo .brand-jo{color:#111827}.ticket-logo .brand-stadium{color:#ff3b30}.ticket-label{font-size:10px;font-weight:900;letter-spacing:1.6px;color:#6b7280;margin-top:6px}
+.ticket-code{font-family:monospace;font-size:12px;color:#6b7280;margin:22px 0 12px}.ticket-line{border-top:2px dashed #d1d5db;margin:10px 0 20px}
+.ticket-grid{display:grid;grid-template-columns:1fr 1fr;gap:17px 12px;margin-bottom:22px}.ticket-grid small{display:block;font-size:9px;color:#6b7280;font-weight:900;letter-spacing:1px}.ticket-grid strong{display:block;font-size:16px;margin-top:4px}
+.ticket-info{border-top:1px solid #e5e7eb;padding-top:13px}.ticket-info p{display:flex;justify-content:space-between;gap:15px;margin:9px 0;font-size:12px}.ticket-info span{color:#6b7280}.ticket-info b{text-align:right}
+.ticket-foot{text-align:center;border-top:1px solid #e5e7eb;margin:16px 0;padding-top:14px;color:#6b7280;font-size:11px}
+@media print{
+  body *{visibility:hidden!important}
+  .ticket-modal,.ticket-modal *{visibility:visible!important}
+  .ticket-modal{position:absolute!important;inset:0!important;background:#fff!important;padding:0!important;display:block!important}
+  .ticket{width:100%;max-width:430px;margin:0 auto;box-shadow:none!important;border-radius:0!important}
+  .ticket-close,.ticket #pdfTicket{display:none!important}
+}
+
+/* Masquer tout badge externe Netlify */
+[class*=&quot;netlify&quot;], [id*=&quot;netlify&quot;], a[href*=&quot;netlify&quot;], iframe[src*=&quot;netlify&quot;], div:has(&gt; a[href*=&quot;netlify.com&quot;]), .netlify-badge, #netlify-badge {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  height: 0 !important;
+  width: 0 !important;
+  overflow: hidden !important;
+}
+
+/* JO STADIUM v19 — modern Netflix-style hero */
+.hero-modern{min-height:680px;padding:90px max(22px,7vw) 70px;align-items:flex-end;background-position:center;background-size:cover}
+.hero-modern:before{content:&quot;&quot;;position:absolute;inset:0;background:linear-gradient(90deg,#05070b 0%,rgba(5,7,11,.93) 28%,rgba(5,7,11,.48) 64%,rgba(5,7,11,.22) 100%),linear-gradient(0deg,#070a0f 0%,rgba(7,10,15,.18) 46%,rgba(0,0,0,.18) 100%);z-index:0}
+.hero-vignette{position:absolute;inset:0;background:radial-gradient(circle at 75% 45%,rgba(229,9,20,.13),transparent 32%);z-index:1;pointer-events:none}
+.hero-modern .hero-content{z-index:3;max-width:760px}
+.hero-kicker{display:inline-flex;align-items:center;gap:8px;color:#e8ebf0;font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px}
+.live-dot{width:7px;height:7px;border-radius:50%;background:#e50914;box-shadow:0 0 0 5px rgba(229,9,20,.12),0 0 14px rgba(229,9,20,.75)}
+.hero-kicker b{color:#ff5148}
+.hero-modern h1{font-size:clamp(50px,8vw,88px);line-height:.91;letter-spacing:-4px;margin:0 0 24px;font-weight:950;text-shadow:0 5px 35px rgba(0,0,0,.5)}
+.hero-modern h1 span{color:#fff}.hero-modern h1 span:last-child{color:#e50914}
+.hero-modern p:not(.eyebrow){font-size:18px;line-height:1.55;color:#c5ccd6;max-width:600px;margin:0 0 22px}
+.hero-meta{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:27px}.hero-meta span{padding:8px 11px;border:1px solid rgba(255,255,255,.13);border-radius:999px;background:rgba(10,13,18,.58);backdrop-filter:blur(8px);color:#e7ebf0;font-size:12px;font-weight:750}
+.hero-cta{padding:15px 22px;border-radius:9px;font-size:15px}.hero-cta span{font-size:24px;line-height:0;margin-left:6px}.hero-phone{padding:15px 18px;border-radius:9px;background:rgba(7,10,15,.48);backdrop-filter:blur(10px)}
+.hero-modern .hero-badge{right:6%;bottom:55px;z-index:3;border-radius:12px;background:rgba(9,12,17,.72);backdrop-filter:blur(14px);box-shadow:0 20px 55px rgba(0,0,0,.4)}
+.hero-scroll{position:absolute;right:7%;bottom:23px;z-index:3;color:#7f8998;font-size:9px;letter-spacing:2px;font-weight:900}.hero-scroll span{color:#fff;font-size:15px;margin-left:6px}
+.stadium-card{box-shadow:0 24px 80px rgba(0,0,0,.28)}
+.stadium-card .body{display:flex;flex-direction:column;justify-content:center}.stadium-card .price-box{margin-bottom:0}
+@media(max-width:650px){
+ .header{height:72px;padding:0 16px}.logo{font-size:25px;gap:7px}.brand-icon{width:44px;height:44px}
+ .hero-modern{min-height:640px;padding:72px 20px 48px;align-items:flex-end;background-position:58% center}
+ .hero-modern:before{background:linear-gradient(180deg,rgba(3,5,8,.8) 0%,rgba(3,5,8,.48) 34%,rgba(3,5,8,.68) 67%,#070a0f 100%)}
+ .hero-modern h1{font-size:54px;letter-spacing:-2.8px;margin-bottom:18px}.hero-modern p:not(.eyebrow){font-size:15px;margin-bottom:18px}
+ .hero-kicker{font-size:9px;letter-spacing:1.5px}.hero-meta{gap:6px;margin-bottom:20px}.hero-meta span{font-size:10px;padding:7px 9px}
+ .actions{gap:8px}.hero-cta,.hero-phone{width:100%;padding:14px 16px}.hero-modern .hero-badge,.hero-scroll{display:none}
+ .stadium-card{border-radius:18px}.stadium-card .cover img{min-height:230px}.stadium-card .body{padding:24px}.stadium-card .price-box{margin-top:22px}
+}
+
+
+/* ===== JO STADIUM — amélioration visuelle + tableau des gains ===== */
+.stats{grid-template-columns:repeat(3,minmax(0,1fr));gap:0}
+.stat{display:flex;align-items:center;justify-content:center;gap:13px;min-width:0;padding:22px 14px;text-align:left}
+.stat-icon{width:44px;height:44px;flex:0 0 44px;display:grid;place-items:center;border:1px solid #303946;border-radius:13px;background:#111720;font-size:20px;box-shadow:inset 0 1px 0 rgba(255,255,255,.04)}
+.stat strong{display:block;font-size:24px;line-height:1.15;white-space:nowrap}
+.stat span{display:block;color:var(--muted);font-size:11px;margin-top:4px}
+.admin-top-actions{display:flex;gap:8px;flex-wrap:wrap}
+.earnings-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin:22px 0 13px;padding:21px;background:linear-gradient(135deg,#121923,#0d1219);border:1px solid var(--line);border-radius:17px}
+.earnings-head .eyebrow{margin:0 0 5px}
+.earnings-head h3{margin:0;font-size:24px}
+.earnings-head p:not(.eyebrow){margin:7px 0 0;color:var(--muted);font-size:12px}
+.earnings-live{white-space:nowrap;color:#7de7b7;font-size:10px;font-weight:850;padding:8px 10px;border:1px solid #24583f;border-radius:999px;background:#0c2118}
+.earnings-live span{display:inline-block;width:7px;height:7px;border-radius:50%;background:#2dd58a;margin-right:6px;box-shadow:0 0 10px rgba(45,213,138,.7)}
+.earnings-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-bottom:20px}
+.earning-card{min-width:0;background:var(--surface);border:1px solid var(--line);border-radius:15px;padding:17px;box-shadow:0 12px 35px rgba(0,0,0,.16)}
+.earning-card.featured{border-color:#7a2724;background:linear-gradient(145deg,#191318,#10151d)}
+.earning-card.total-earning{border-color:#394554}
+.earning-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:13px;color:#aeb7c4}
+.earning-top span{font-size:17px}.earning-top small{font-size:10px;font-weight:850;text-transform:uppercase;letter-spacing:.5px;text-align:right}
+.earning-card&gt;strong{display:block;font-size:22px;line-height:1.15;white-space:nowrap}
+.earning-card p{margin:7px 0 0;color:var(--muted);font-size:10px}
+.cover img{object-position:center center;filter:saturate(1.06) contrast(1.03)}
+.hero-modern{background-position:center center}
+@media(max-width:950px){.earnings-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:650px){
+  .stats{grid-template-columns:1fr}
+  .stat{justify-content:flex-start;border-right:0;border-bottom:1px solid var(--line);padding:16px 20px}
+  .stat:last-child{border-bottom:0}
+  .stat strong{font-size:21px}
+  .admin-top{align-items:flex-start;flex-direction:column}
+  .admin-top-actions{width:100%}.admin-top-actions .btn{flex:1}
+  .earnings-head{align-items:flex-start;flex-direction:column;padding:18px}
+  .earnings-live{white-space:normal}
+  .earnings-grid{grid-template-columns:1fr 1fr}
+  .earning-card{padding:14px}
+  .earning-card&gt;strong{font-size:19px}
+  .earning-card.total-earning{grid-column:1/-1}
+}
+
+/* ===== JO STADIUM — graphiques du tableau de bord ===== */
+.dashboard-charts{margin:0 0 20px;background:var(--surface);border:1px solid var(--line);border-radius:17px;overflow:hidden}
+.dashboard-chart-head{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:18px 20px;border-bottom:1px solid var(--line)}
+.dashboard-chart-head h4{margin:0;font-size:17px}
+.dashboard-chart-head p{margin:5px 0 0;color:var(--muted);font-size:10px}
+.chart-switch{display:flex;gap:5px;flex-wrap:wrap}
+.chart-switch button{border:1px solid var(--line);background:#111720;color:#9ea8b6;border-radius:9px;padding:8px 10px;font:800 10px inherit;cursor:pointer}
+.chart-switch button.active{background:#8f2421;color:#fff;border-color:#b43834}
+.chart-area{padding:18px 20px 20px}
+.bar-chart{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));align-items:end;gap:10px;height:230px}
+.bar-item{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;min-width:0}
+.bar-value{font-size:9px;font-weight:850;color:#e6ebf2;min-height:13px;margin-bottom:6px;white-space:nowrap}
+.bar-track{width:min(38px,72%);height:160px;display:flex;align-items:flex-end;background:#111720;border:1px solid #222c38;border-radius:8px 8px 5px 5px;overflow:hidden}
+.bar-fill{width:100%;min-height:2px;background:linear-gradient(180deg,#ff4b45,#9e2523);border-radius:7px 7px 0 0;transition:height .35s ease}
+.bar-label{margin-top:8px;font-size:9px;color:#8e99a8;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:80px}
+.chart-empty{height:230px;display:grid;place-items:center;color:#697585;font-size:12px;border:1px dashed #2a3441;border-radius:12px}
+.chart-foot{display:flex;justify-content:space-between;gap:12px;margin-top:12px;color:#7f8997;font-size:10px}
+.chart-foot strong{color:#d8dee7}
+@media(max-width:650px){
+  .dashboard-chart-head{align-items:flex-start;flex-direction:column;padding:16px}
+  .chart-switch{width:100%}.chart-switch button{flex:1}
+  .chart-area{padding:15px 10px 17px}
+  .bar-chart{gap:5px;height:210px}
+  .bar-track{height:145px;width:min(32px,76%)}
+  .bar-value{font-size:8px}.bar-label{font-size:8px}
+}
+
+/* ===== JO STADIUM — espace admin professionnel ===== */
+.admin-tools{display:grid;grid-template-columns:minmax(220px,1.5fr) minmax(180px,.8fr) auto;gap:9px;margin:0 0 14px}
+.admin-search,.admin-date-filter{width:100%;box-sizing:border-box;background:#0e141c;border:1px solid var(--line);color:#e8edf3;border-radius:11px;padding:12px 13px;font:600 12px inherit;outline:none}
+.admin-search:focus,.admin-date-filter:focus{border-color:#9e2b28;box-shadow:0 0 0 3px rgba(158,43,40,.12)}
+.admin-clear{white-space:nowrap}
+.admin-results{color:var(--muted);font-size:10px;margin:0 0 12px}
+.admin-calendar{background:var(--surface);border:1px solid var(--line);border-radius:17px;margin:0 0 16px;overflow:hidden}
+.calendar-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:15px 18px;border-bottom:1px solid var(--line)}
+.calendar-head h4{margin:0;font-size:15px}
+.calendar-nav{display:flex;gap:6px}
+.calendar-nav button{width:34px;height:32px;border-radius:9px;border:1px solid var(--line);background:#111720;color:#fff;cursor:pointer}
+.calendar-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));padding:10px;gap:5px}
+.cal-weekday{text-align:center;color:#697585;font-size:9px;font-weight:850;text-transform:uppercase;padding:5px 0}
+.cal-day{min-height:55px;border:1px solid #202a36;background:#10161e;border-radius:9px;padding:7px;cursor:pointer;color:#cfd6df;position:relative}
+.cal-day:hover{border-color:#6d2b29}
+.cal-day.muted{opacity:.38}
+.cal-day.today{border-color:#a92e2a}
+.cal-day.selected{background:#321719;border-color:#d03a35;box-shadow:inset 0 0 0 1px rgba(255,75,69,.25)}
+.cal-num{font-size:10px;font-weight:850}
+.cal-dot{position:absolute;right:7px;bottom:7px;width:7px;height:7px;border-radius:50%;background:#ff4b45;box-shadow:0 0 8px rgba(255,75,69,.55)}
+.cal-count{position:absolute;right:6px;bottom:5px;font-size:8px;color:#ffaaa7;font-weight:850}
+.admin-card .admin-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+.admin-card .danger{border-color:#6f2927;color:#ffaaa7;background:#1a1113}
+.admin-empty-filter{padding:18px;border:1px dashed #293442;border-radius:13px;color:#768190;text-align:center;font-size:11px}
+@media(max-width:700px){
+  .admin-tools{grid-template-columns:1fr 1fr}
+  .admin-tools .admin-search{grid-column:1/-1}
+  .admin-clear{width:100%}
+  .calendar-grid{padding:7px;gap:4px}
+  .cal-day{min-height:47px;padding:6px}
+}
+
+
+/* Téléphone : garder le texte blanc même avec l&#x27;autocomplétion Android/Chrome */
+#phone, #phone:-webkit-autofill, #phone:-webkit-autofill:hover, #phone:-webkit-autofill:focus {
+  -webkit-text-fill-color:#f5f7fa !important;
+  caret-color:#fff;
+}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body class=&quot;admin-only&quot;&gt;
+&lt;style&gt;
+/* Interface strictement réservée à l&#x27;administration */
+.admin-only main &gt; #accueil,
+.admin-only main &gt; #reservation,
+.admin-only main &gt; #mes-reservations,
+.admin-only main &gt; section:not(#admin),
+.admin-only main &gt; div { display:none !important; }
+.admin-only .admin-section { display:block !important; min-height:calc(100vh - 150px); }
+.admin-only .header .nav a { display:none; }
+.admin-only .header .nav a.admin-back { display:block; }
+.admin-only .admin-section { padding-top:55px; }
+.admin-switcher{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 18px}
+.admin-switcher .btn{flex:1;min-width:170px;text-align:center;text-decoration:none}
+.admin-switcher .current{border-color:#ff4b45;background:rgba(255,59,48,.10);color:#fff}
+@media(max-width:650px){.admin-switcher{flex-direction:column}.admin-switcher .btn{width:100%}}
+&lt;/style&gt;
+&lt;header class=&quot;header&quot;&gt;
+  &lt;a class=&quot;logo&quot; href=&quot;#accueil&quot;&gt;&lt;img class=&quot;brand-icon&quot; src=&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIiBhcmlhLWxhYmVsPSJMb2dvIEpPIFNUQURJVU0iPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iciIgeDE9IjAiIHgyPSIxIj48c3RvcCBzdG9wLWNvbG9yPSIjZmYzYjMwIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjYjgwZjE4Ii8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PGNpcmNsZSBjeD0iNjAiIGN5PSI0MyIgcj0iMjciIGZpbGw9IiNmN2Y3ZjciIHN0cm9rZT0iIzExMSIgc3Ryb2tlLXdpZHRoPSI1Ii8+PHBhdGggZD0iTTYwIDIzbDkgNy0zIDExSDU0bC0zLTExek0zOSAzOWwxMS0zIDcgOC02IDEwLTExLTN6TTgxIDM5bC0xMS0zLTcgOCA2IDEwIDExLTN6TTQ2IDYxbDktN2gxMGw5IDctNSAxMUg1MXoiIGZpbGw9IiMxNzE5MWQiLz48cGF0aCBkPSJNMTggOTFjMTAtMTIgMjUtMTggNDItMThzMzIgNiA0MiAxOHYxM0gxOHoiIGZpbGw9InVybCgjcikiLz48cGF0aCBkPSJNMjcgOTFoNjZNMzcgNzl2MjVNNjAgNzV2MjlNODMgNzl2MjUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIzIiBvcGFjaXR5PSIuOSIvPjxwYXRoIGQ9Ik0xNCAxMDRoOTIiIHN0cm9rZT0iI2Q4ZGRlNSIgc3Ryb2tlLXdpZHRoPSI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48L3N2Zz4=&quot; alt=&quot;Logo ballon et stade&quot;&gt;&lt;span class=&quot;brand-jo&quot;&gt;JO&lt;/span&gt;&lt;span class=&quot;brand-stadium&quot;&gt;STADIUM&lt;/span&gt;&lt;/a&gt;
+  &lt;button class=&quot;menu&quot; id=&quot;menu&quot;&gt;☰&lt;/button&gt;
+  &lt;nav class=&quot;nav&quot; id=&quot;nav&quot;&gt;&lt;a class=&quot;admin-back&quot; href=&quot;#client&quot; onclick=&quot;parent.showClientPage();return false;&quot;&gt;← Retour au site&lt;/a&gt;&lt;/nav&gt;
+&lt;/header&gt;
+
+&lt;main&gt;
+&lt;section class=&quot;hero hero-modern&quot; id=&quot;accueil&quot;&gt;
+  &lt;div class=&quot;hero-vignette&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;hero-content&quot;&gt;
+    &lt;div class=&quot;hero-kicker&quot;&gt;&lt;span class=&quot;live-dot&quot;&gt;&lt;/span&gt; JO STADIUM &lt;b&gt;· TERRAIN 6×6&lt;/b&gt;&lt;/div&gt;
+    &lt;h1&gt;Welcome to &lt;span&gt;JO&lt;/span&gt;&lt;br&gt;&lt;span&gt;STADIUM&lt;/span&gt;&lt;/h1&gt;
+    &lt;p&gt;Réservez votre créneau et retrouvez votre équipe sur le terrain.&lt;/p&gt;
+    &lt;div class=&quot;hero-meta&quot;&gt;&lt;span&gt;📍 Boumerdes, Ouled Moussa&lt;/span&gt;&lt;span&gt;⚽ 6 à 12 joueurs&lt;/span&gt;&lt;span&gt;💳 100 DA / joueur&lt;/span&gt;&lt;/div&gt;
+    &lt;div class=&quot;actions&quot;&gt;&lt;a class=&quot;btn primary hero-cta&quot; href=&quot;#reservation&quot;&gt;Réserver maintenant &lt;span&gt;›&lt;/span&gt;&lt;/a&gt;&lt;a class=&quot;btn ghost hero-phone&quot; href=&quot;tel:0554184872&quot;&gt;📞 0554 18 48 72&lt;/a&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;hero-badge&quot;&gt;&lt;strong&gt;⚽ JO STADIUM · 6×6&lt;/strong&gt;&lt;small&gt;Terrain disponible · 100 DA / joueur&lt;/small&gt;&lt;/div&gt;
+  &lt;div class=&quot;hero-scroll&quot;&gt;DÉCOUVRIR &lt;span&gt;↓&lt;/span&gt;&lt;/div&gt;
+&lt;/section&gt;
+
+&lt;div class=&quot;stats&quot;&gt;
+  &lt;div class=&quot;stat&quot;&gt;&lt;div class=&quot;stat-icon&quot;&gt;⚽&lt;/div&gt;&lt;div&gt;&lt;strong&gt;6×6&lt;/strong&gt;&lt;span&gt;Terrain disponible&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+  &lt;div class=&quot;stat&quot;&gt;&lt;div class=&quot;stat-icon&quot;&gt;💳&lt;/div&gt;&lt;div&gt;&lt;strong&gt;100 DA&lt;/strong&gt;&lt;span&gt;Par joueur&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+  &lt;div class=&quot;stat&quot;&gt;&lt;div class=&quot;stat-icon&quot;&gt;📞&lt;/div&gt;&lt;div&gt;&lt;strong&gt;0554 18 48 72&lt;/strong&gt;&lt;span&gt;Réservation &amp; contact&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;section class=&quot;section&quot; id=&quot;stade&quot;&gt;
+  &lt;div class=&quot;heading&quot;&gt;&lt;p class=&quot;eyebrow&quot;&gt;NOTRE STADE&lt;/p&gt;&lt;h2&gt;JO STADIUM&lt;/h2&gt;&lt;/div&gt;
+  &lt;article class=&quot;stadium-card&quot;&gt;
+    &lt;div class=&quot;cover&quot;&gt;&lt;img src=&quot;https://dynamic-media-cdn.tripadvisor.com/media/photo-o/24/16/1b/cd/iron-park-zaouia-beni.jpg?h=-1&amp;s=1&amp;w=1200&quot; alt=&quot;Terrain de football 6×6&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;body&quot;&gt;
+      &lt;span class=&quot;tag&quot;&gt;TERRAIN 6×6&lt;/span&gt;
+      &lt;h3&gt;JO STADIUM&lt;/h3&gt;
+      &lt;div class=&quot;info&quot;&gt;
+        &lt;div&gt;📍 &lt;span&gt;Boumerdes, Ouled Moussa&lt;/span&gt;&lt;/div&gt;
+        &lt;div&gt;📞 &lt;span&gt;0554 18 48 72&lt;/span&gt;&lt;/div&gt;
+        &lt;div&gt;👥 &lt;span&gt;6 à 12 joueurs&lt;/span&gt;&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;price-box&quot;&gt;&lt;div class=&quot;price&quot;&gt;100 DA&lt;/div&gt;&lt;div class=&quot;per&quot;&gt;/ joueur&lt;/div&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/article&gt;
+&lt;/section&gt;
+
+&lt;div class=&quot;booking-wrap&quot; id=&quot;reservation&quot;&gt;
+&lt;section class=&quot;section booking&quot;&gt;
+  &lt;div class=&quot;intro&quot;&gt;
+    &lt;p class=&quot;eyebrow&quot;&gt;RÉSERVATION&lt;/p&gt;&lt;h2&gt;Réserve ton créneau&lt;/h2&gt;
+    &lt;p&gt;Choisis la date, l&#x27;heure et le nombre de joueurs. Le prix total est calculé automatiquement à 100 DA par joueur.&lt;/p&gt;
+    &lt;div class=&quot;checks&quot;&gt;&lt;div class=&quot;check&quot;&gt;&lt;b&gt;✓&lt;/b&gt; Confirmation instantanée&lt;/div&gt;&lt;div class=&quot;check&quot;&gt;&lt;b&gt;✓&lt;/b&gt; Stade 6×6 uniquement&lt;/div&gt;&lt;div class=&quot;check&quot;&gt;&lt;b&gt;✓&lt;/b&gt; Contact : 0554 18 48 72&lt;/div&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;form class=&quot;form&quot; id=&quot;form&quot;&gt;
+    &lt;div class=&quot;booking-type&quot;&gt;
+      &lt;button type=&quot;button&quot; class=&quot;type-card active&quot; data-type=&quot;single&quot;&gt;&lt;span&gt;📅&lt;/span&gt;&lt;div&gt;&lt;strong&gt;Réservation simple&lt;/strong&gt;&lt;small&gt;Un seul créneau&lt;/small&gt;&lt;/div&gt;&lt;/button&gt;
+      &lt;button type=&quot;button&quot; class=&quot;type-card&quot; data-type=&quot;monthly&quot;&gt;&lt;span&gt;🗓️&lt;/span&gt;&lt;div&gt;&lt;strong&gt;Réservation mensuelle&lt;/strong&gt;&lt;small&gt;Le même créneau chaque semaine&lt;/small&gt;&lt;/div&gt;&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div id=&quot;singleFields&quot;&gt;
+      &lt;label&gt;Date&lt;input id=&quot;date&quot; type=&quot;date&quot; required&gt;&lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div id=&quot;monthlyFields&quot; class=&quot;hidden-fields&quot;&gt;
+      &lt;div class=&quot;row&quot;&gt;
+        &lt;label&gt;Mois&lt;input id=&quot;month&quot; type=&quot;month&quot;&gt;&lt;/label&gt;
+        &lt;label&gt;Jour de la semaine&lt;select id=&quot;weekday&quot;&gt;
+          &lt;option value=&quot;1&quot;&gt;Lundi&lt;/option&gt;&lt;option value=&quot;2&quot;&gt;Mardi&lt;/option&gt;&lt;option value=&quot;3&quot;&gt;Mercredi&lt;/option&gt;&lt;option value=&quot;4&quot;&gt;Jeudi&lt;/option&gt;&lt;option value=&quot;5&quot;&gt;Vendredi&lt;/option&gt;&lt;option value=&quot;6&quot;&gt;Samedi&lt;/option&gt;&lt;option value=&quot;0&quot;&gt;Dimanche&lt;/option&gt;
+        &lt;/select&gt;&lt;/label&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;monthly-info&quot; id=&quot;monthlyInfo&quot;&gt;Le même créneau sera réservé chaque semaine pendant le mois choisi. Les dates déjà passées ne sont pas incluses.&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;label&gt;Créneau horaire&lt;div class=&quot;slots&quot; id=&quot;slots&quot;&gt;&lt;/div&gt;&lt;/label&gt;
+    &lt;div class=&quot;row&quot;&gt;
+      &lt;label&gt;Nombre de joueurs
+&lt;select id=&quot;players&quot; required&gt;
+  &lt;option value=&quot;6&quot;&gt;6 joueurs&lt;/option&gt;&lt;option value=&quot;7&quot;&gt;7 joueurs&lt;/option&gt;&lt;option value=&quot;8&quot;&gt;8 joueurs&lt;/option&gt;&lt;option value=&quot;9&quot;&gt;9 joueurs&lt;/option&gt;&lt;option value=&quot;10&quot;&gt;10 joueurs&lt;/option&gt;&lt;option value=&quot;11&quot;&gt;11 joueurs&lt;/option&gt;&lt;option value=&quot;12&quot;&gt;12 joueurs&lt;/option&gt;
+&lt;/select&gt;
+&lt;/label&gt;
+      &lt;label&gt;Nom complet&lt;input id=&quot;name&quot; required placeholder=&quot;Ex. Mohamed Benali&quot;&gt;&lt;/label&gt;
+    &lt;/div&gt;
+    &lt;label&gt;Téléphone&lt;input id=&quot;phone&quot; type=&quot;tel&quot; required placeholder=&quot;0550 00 00 00&quot;&gt;&lt;/label&gt;
+    &lt;div class=&quot;total&quot;&gt;&lt;span&gt;Total &lt;small id=&quot;totalHint&quot;&gt;&lt;/small&gt;&lt;/span&gt;&lt;strong id=&quot;total&quot;&gt;600 DA&lt;/strong&gt;&lt;/div&gt;
+    &lt;button class=&quot;btn primary full&quot; type=&quot;submit&quot; id=&quot;submitBooking&quot;&gt;Confirmer la réservation&lt;/button&gt;
+  &lt;/form&gt;
+&lt;/section&gt;
+&lt;/div&gt;
+
+&lt;section class=&quot;section&quot; id=&quot;mes-reservations&quot;&gt;
+  &lt;div class=&quot;heading&quot;&gt;&lt;p class=&quot;eyebrow&quot;&gt;MON ESPACE&lt;/p&gt;&lt;h2&gt;Mes réservations&lt;/h2&gt;&lt;/div&gt;
+  &lt;div class=&quot;my-list&quot; id=&quot;list&quot;&gt;&lt;/div&gt;
+&lt;/section&gt;
+&lt;/main&gt;
+
+&lt;section class=&quot;section admin-section&quot; id=&quot;admin&quot;&gt;
+  &lt;div class=&quot;heading&quot;&gt;&lt;p class=&quot;eyebrow&quot;&gt;ESPACE PRIVÉ&lt;/p&gt;&lt;h2&gt;Administration JO STADIUM&lt;/h2&gt;&lt;/div&gt;
+  &lt;div class=&quot;admin-switcher&quot; aria-label=&quot;Navigation entre les espaces&quot;&gt;
+    &lt;a class=&quot;btn ghost&quot; id=&quot;clientSpaceBtn&quot; href=&quot;#client&quot; onclick=&quot;parent.showClientPage();return false;&quot;&gt;👤 Espace client&lt;/a&gt;
+    &lt;a class=&quot;btn primary current&quot; href=&quot;/admin&quot;&gt;🔐 Espace admin&lt;/a&gt;
+  &lt;/div&gt;
+  &lt;div id=&quot;adminLogin&quot; class=&quot;form admin-login&quot;&gt;
+    &lt;p style=&quot;color:var(--muted);margin-top:0&quot;&gt;Espace réservé à l&#x27;administrateur du stade.&lt;/p&gt;
+    &lt;label&gt;Mot de passe administrateur&lt;input id=&quot;adminPassword&quot; type=&quot;password&quot; placeholder=&quot;Mot de passe&quot;&gt;&lt;/label&gt;
+    &lt;button class=&quot;btn primary full&quot; id=&quot;adminLoginBtn&quot; type=&quot;button&quot;&gt;🔐 Ouvrir l&#x27;administration&lt;/button&gt;
+    &lt;p style=&quot;font-size:11px;color:#77818f;margin-bottom:0&quot;&gt;Les réservations sont confirmées automatiquement. Cet espace sert uniquement à consulter les réservations et leurs tickets.&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div id=&quot;adminPanel&quot; class=&quot;hidden-fields&quot;&gt;
+    &lt;div class=&quot;admin-top&quot;&gt;&lt;div&gt;&lt;strong id=&quot;adminCount&quot;&gt;0&lt;/strong&gt; réservation(s)&lt;/div&gt;&lt;div class=&quot;admin-top-actions&quot;&gt;&lt;button class=&quot;btn ghost&quot; id=&quot;adminRefresh&quot; type=&quot;button&quot;&gt;↻ Actualiser&lt;/button&gt;&lt;button class=&quot;btn ghost&quot; id=&quot;adminLogout&quot; type=&quot;button&quot;&gt;Se déconnecter&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;
+
+    &lt;div class=&quot;earnings-head&quot;&gt;
+      &lt;div&gt;
+        &lt;p class=&quot;eyebrow&quot;&gt;TABLEAU DE BORD&lt;/p&gt;
+        &lt;h3&gt;Gains des réservations&lt;/h3&gt;
+        &lt;p&gt;Calcul automatique à partir des séances réservées au tarif de &lt;strong&gt;100 DA / joueur&lt;/strong&gt;.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;earnings-live&quot;&gt;&lt;span&gt;&lt;/span&gt; Mis à jour automatiquement&lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;earnings-grid&quot;&gt;
+      &lt;article class=&quot;earning-card featured&quot;&gt;&lt;div class=&quot;earning-top&quot;&gt;&lt;span&gt;📅&lt;/span&gt;&lt;small&gt;Aujourd&#x27;hui&lt;/small&gt;&lt;/div&gt;&lt;strong id=&quot;gainDay&quot;&gt;0 DA&lt;/strong&gt;&lt;p id=&quot;countDay&quot;&gt;0 séance&lt;/p&gt;&lt;/article&gt;
+      &lt;article class=&quot;earning-card&quot;&gt;&lt;div class=&quot;earning-top&quot;&gt;&lt;span&gt;📊&lt;/span&gt;&lt;small&gt;Cette semaine&lt;/small&gt;&lt;/div&gt;&lt;strong id=&quot;gainWeek&quot;&gt;0 DA&lt;/strong&gt;&lt;p id=&quot;countWeek&quot;&gt;0 séance&lt;/p&gt;&lt;/article&gt;
+      &lt;article class=&quot;earning-card&quot;&gt;&lt;div class=&quot;earning-top&quot;&gt;&lt;span&gt;🗓️&lt;/span&gt;&lt;small&gt;Ce mois&lt;/small&gt;&lt;/div&gt;&lt;strong id=&quot;gainMonth&quot;&gt;0 DA&lt;/strong&gt;&lt;p id=&quot;countMonth&quot;&gt;0 séance&lt;/p&gt;&lt;/article&gt;
+      &lt;article class=&quot;earning-card&quot;&gt;&lt;div class=&quot;earning-top&quot;&gt;&lt;span&gt;📈&lt;/span&gt;&lt;small&gt;Cette année&lt;/small&gt;&lt;/div&gt;&lt;strong id=&quot;gainYear&quot;&gt;0 DA&lt;/strong&gt;&lt;p id=&quot;countYear&quot;&gt;0 séance&lt;/p&gt;&lt;/article&gt;
+      &lt;article class=&quot;earning-card total-earning&quot;&gt;&lt;div class=&quot;earning-top&quot;&gt;&lt;span&gt;💰&lt;/span&gt;&lt;small&gt;Total enregistré&lt;/small&gt;&lt;/div&gt;&lt;strong id=&quot;gainTotal&quot;&gt;0 DA&lt;/strong&gt;&lt;p id=&quot;countTotal&quot;&gt;0 séance&lt;/p&gt;&lt;/article&gt;
+    &lt;/div&gt;
+
+    &lt;section class=&quot;dashboard-charts&quot; aria-label=&quot;Graphiques des gains&quot;&gt;
+      &lt;div class=&quot;dashboard-chart-head&quot;&gt;
+        &lt;div&gt;
+          &lt;h4&gt;📊 Évolution des gains&lt;/h4&gt;
+          &lt;p&gt;Montant généré et nombre de séances réservées&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;chart-switch&quot; role=&quot;tablist&quot; aria-label=&quot;Période du graphique&quot;&gt;
+          &lt;button type=&quot;button&quot; class=&quot;active&quot; data-chart-period=&quot;days&quot;&gt;7 jours&lt;/button&gt;
+          &lt;button type=&quot;button&quot; data-chart-period=&quot;weeks&quot;&gt;4 semaines&lt;/button&gt;
+          &lt;button type=&quot;button&quot; data-chart-period=&quot;months&quot;&gt;12 mois&lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;chart-area&quot;&gt;
+        &lt;div id=&quot;adminRevenueChart&quot; class=&quot;bar-chart&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;chart-foot&quot;&gt;
+          &lt;span&gt;Gains affichés : &lt;strong id=&quot;chartRevenueTotal&quot;&gt;0 DA&lt;/strong&gt;&lt;/span&gt;
+          &lt;span&gt;Séances : &lt;strong id=&quot;chartSessionTotal&quot;&gt;0&lt;/strong&gt;&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;div class=&quot;admin-tools&quot;&gt;
+      &lt;input id=&quot;adminSearch&quot; class=&quot;admin-search&quot; type=&quot;search&quot; placeholder=&quot;🔎 Rechercher par nom, téléphone ou numéro de ticket…&quot;&gt;
+      &lt;input id=&quot;adminDateFilter&quot; class=&quot;admin-date-filter&quot; type=&quot;date&quot; aria-label=&quot;Filtrer par date&quot;&gt;
+      &lt;button id=&quot;adminClearFilters&quot; class=&quot;btn ghost admin-clear&quot; type=&quot;button&quot;&gt;✕ Effacer&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;p id=&quot;adminResults&quot; class=&quot;admin-results&quot;&gt;Toutes les réservations affichées · Une annulation libère tous les créneaux de la réservation.&lt;/p&gt;
+
+    &lt;section class=&quot;admin-calendar&quot; aria-label=&quot;Calendrier des réservations&quot;&gt;
+      &lt;div class=&quot;calendar-head&quot;&gt;
+        &lt;div&gt;&lt;h4 id=&quot;calendarTitle&quot;&gt;Calendrier&lt;/h4&gt;&lt;/div&gt;
+        &lt;div class=&quot;calendar-nav&quot;&gt;
+          &lt;button id=&quot;calPrev&quot; type=&quot;button&quot; aria-label=&quot;Mois précédent&quot;&gt;‹&lt;/button&gt;
+          &lt;button id=&quot;calToday&quot; type=&quot;button&quot; aria-label=&quot;Aujourd&#x27;hui&quot;&gt;Aujourd&#x27;hui&lt;/button&gt;
+          &lt;button id=&quot;calNext&quot; type=&quot;button&quot; aria-label=&quot;Mois suivant&quot;&gt;›&lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;calendar-grid&quot; id=&quot;adminCalendar&quot;&gt;&lt;/div&gt;
+    &lt;/section&gt;
+    &lt;div class=&quot;admin-tabs&quot;&gt;&lt;button class=&quot;admin-tab active&quot; data-filter=&quot;confirmed&quot; type=&quot;button&quot;&gt;🟢 Réservations confirmées&lt;/button&gt;&lt;button class=&quot;admin-tab&quot; data-filter=&quot;all&quot; type=&quot;button&quot;&gt;Toutes&lt;/button&gt;&lt;/div&gt;
+    &lt;div class=&quot;my-list&quot; id=&quot;adminList&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+&lt;footer&gt;
+  &lt;div&gt;&lt;a class=&quot;logo&quot; href=&quot;#accueil&quot;&gt;&lt;img class=&quot;brand-icon&quot; src=&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIiBhcmlhLWxhYmVsPSJMb2dvIEpPIFNUQURJVU0iPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iciIgeDE9IjAiIHgyPSIxIj48c3RvcCBzdG9wLWNvbG9yPSIjZmYzYjMwIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjYjgwZjE4Ii8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PGNpcmNsZSBjeD0iNjAiIGN5PSI0MyIgcj0iMjciIGZpbGw9IiNmN2Y3ZjciIHN0cm9rZT0iIzExMSIgc3Ryb2tlLXdpZHRoPSI1Ii8+PHBhdGggZD0iTTYwIDIzbDkgNy0zIDExSDU0bC0zLTExek0zOSAzOWwxMS0zIDcgOC02IDEwLTExLTN6TTgxIDM5bC0xMS0zLTcgOCA2IDEwIDExLTN6TTQ2IDYxbDktN2gxMGw5IDctNSAxMUg1MXoiIGZpbGw9IiMxNzE5MWQiLz48cGF0aCBkPSJNMTggOTFjMTAtMTIgMjUtMTggNDItMThzMzIgNiA0MiAxOHYxM0gxOHoiIGZpbGw9InVybCgjcikiLz48cGF0aCBkPSJNMjcgOTFoNjZNMzcgNzl2MjVNNjAgNzV2MjlNODMgNzl2MjUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIzIiBvcGFjaXR5PSIuOSIvPjxwYXRoIGQ9Ik0xNCAxMDRoOTIiIHN0cm9rZT0iI2Q4ZGRlNSIgc3Ryb2tlLXdpZHRoPSI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48L3N2Zz4=&quot; alt=&quot;Logo ballon et stade&quot;&gt;&lt;span class=&quot;brand-jo&quot;&gt;JO&lt;/span&gt;&lt;span class=&quot;brand-stadium&quot;&gt;STADIUM&lt;/span&gt;&lt;/a&gt;&lt;p&gt;Réservation officielle de JO STADIUM.&lt;/p&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;strong&gt;Adresse&lt;/strong&gt;&lt;span&gt;Boumerdes, Ouled Moussa&lt;/span&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;strong&gt;Contact&lt;/strong&gt;&lt;a href=&quot;tel:0554184872&quot;&gt;📞 0554 18 48 72&lt;/a&gt;&lt;/div&gt;
+&lt;/footer&gt;
+
+&lt;div class=&quot;ticket-modal hidden&quot; id=&quot;ticketModal&quot;&gt;
+  &lt;div class=&quot;ticket&quot;&gt;
+    &lt;button class=&quot;ticket-close&quot; id=&quot;ticketClose&quot;&gt;×&lt;/button&gt;
+    &lt;div class=&quot;ticket-head&quot;&gt;
+      &lt;div class=&quot;ticket-logo&quot;&gt;&lt;img class=&quot;brand-icon&quot; src=&quot;data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAgMTIwIiBhcmlhLWxhYmVsPSJMb2dvIEpPIFNUQURJVU0iPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iciIgeDE9IjAiIHgyPSIxIj48c3RvcCBzdG9wLWNvbG9yPSIjZmYzYjMwIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjYjgwZjE4Ii8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PGNpcmNsZSBjeD0iNjAiIGN5PSI0MyIgcj0iMjciIGZpbGw9IiNmN2Y3ZjciIHN0cm9rZT0iIzExMSIgc3Ryb2tlLXdpZHRoPSI1Ii8+PHBhdGggZD0iTTYwIDIzbDkgNy0zIDExSDU0bC0zLTExek0zOSAzOWwxMS0zIDcgOC02IDEwLTExLTN6TTgxIDM5bC0xMS0zLTcgOCA2IDEwIDExLTN6TTQ2IDYxbDktN2gxMGw5IDctNSAxMUg1MXoiIGZpbGw9IiMxNzE5MWQiLz48cGF0aCBkPSJNMTggOTFjMTAtMTIgMjUtMTggNDItMThzMzIgNiA0MiAxOHYxM0gxOHoiIGZpbGw9InVybCgjcikiLz48cGF0aCBkPSJNMjcgOTFoNjZNMzcgNzl2MjVNNjAgNzV2MjlNODMgNzl2MjUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIzIiBvcGFjaXR5PSIuOSIvPjxwYXRoIGQ9Ik0xNCAxMDRoOTIiIHN0cm9rZT0iI2Q4ZGRlNSIgc3Ryb2tlLXdpZHRoPSI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48L3N2Zz4=&quot; alt=&quot;Logo ballon et stade&quot;&gt;&lt;span class=&quot;brand-jo&quot;&gt;JO&lt;/span&gt;&lt;span class=&quot;brand-stadium&quot;&gt;STADIUM&lt;/span&gt;&lt;/div&gt;
+      &lt;div class=&quot;ticket-label&quot;&gt;TICKET DE RÉSERVATION&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;ticket-code&quot; id=&quot;ticketCode&quot;&gt;JO-000000&lt;/div&gt;
+    &lt;div class=&quot;ticket-line&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;ticket-grid&quot;&gt;
+      &lt;div&gt;&lt;small&gt;DATE&lt;/small&gt;&lt;strong id=&quot;ticketDate&quot;&gt;—&lt;/strong&gt;&lt;/div&gt;
+      &lt;div&gt;&lt;small&gt;CRÉNEAU&lt;/small&gt;&lt;strong id=&quot;ticketSlot&quot;&gt;—&lt;/strong&gt;&lt;/div&gt;
+      &lt;div&gt;&lt;small&gt;JOUEURS&lt;/small&gt;&lt;strong id=&quot;ticketPlayers&quot;&gt;—&lt;/strong&gt;&lt;/div&gt;
+      &lt;div&gt;&lt;small&gt;TOTAL&lt;/small&gt;&lt;strong id=&quot;ticketTotal&quot;&gt;—&lt;/strong&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;ticket-status&quot; id=&quot;ticketStatus&quot;&gt;RÉSERVATION CONFIRMÉE&lt;/div&gt;
+    &lt;div class=&quot;ticket-info&quot;&gt;
+      &lt;p&gt;&lt;span&gt;Type&lt;/span&gt;&lt;b id=&quot;ticketType&quot;&gt;—&lt;/b&gt;&lt;/p&gt;
+      &lt;p&gt;&lt;span&gt;Nom&lt;/span&gt;&lt;b id=&quot;ticketName&quot;&gt;—&lt;/b&gt;&lt;/p&gt;
+      &lt;p&gt;&lt;span&gt;Téléphone&lt;/span&gt;&lt;b id=&quot;ticketPhone&quot;&gt;—&lt;/b&gt;&lt;/p&gt;
+      &lt;p&gt;&lt;span&gt;Stade&lt;/span&gt;&lt;b&gt;JO STADIUM&lt;/b&gt;&lt;/p&gt;
+      &lt;p&gt;&lt;span&gt;Adresse&lt;/span&gt;&lt;b&gt;Boumerdes, Ouled Moussa&lt;/b&gt;&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;ticket-foot&quot;&gt;100 DA / joueur · Merci pour votre réservation&lt;/div&gt;
+    &lt;button class=&quot;btn primary full&quot; id=&quot;pdfTicket&quot;&gt;📄 Enregistrer en PDF&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;modal hidden&quot; id=&quot;modal&quot;&gt;&lt;div class=&quot;modal-box&quot;&gt;&lt;button class=&quot;close&quot; id=&quot;close&quot;&gt;×&lt;/button&gt;&lt;div class=&quot;ok&quot;&gt;✓&lt;/div&gt;&lt;h2&gt;Réservation confirmée !&lt;/h2&gt;&lt;p id=&quot;msg&quot;&gt;&lt;/p&gt;&lt;button class=&quot;btn primary full&quot; id=&quot;showTicketBtn&quot;&gt;🎫 Voir le ticket&lt;/button&gt;&lt;button class=&quot;btn ghost full&quot; id=&quot;ok&quot;&gt;Fermer&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;script&gt;
+const times=[&quot;16:00 - 17:00&quot;,&quot;17:00 - 18:00&quot;,&quot;18:00 - 19:00&quot;,&quot;19:00 - 20:00&quot;];
+const PRICE=100,$=x=&gt;document.getElementById(x),today=new Date().toISOString().slice(0,10);
+let selected=&quot;&quot;,bookingType=&quot;single&quot;,serverBookings=[];
+const LOCAL_KEY=&quot;joStadiumMyBookings&quot;;
+$(&quot;date&quot;).min=today;$((&quot;date&quot;)).value=today;
+const now=new Date();
+$(&quot;month&quot;).value=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,&quot;0&quot;)}`;
+
+async function api(url,options={}){
+  const isStaticHost = !window.location.port &amp;&amp; (
+    window.location.hostname.includes(&#x27;netlify.app&#x27;) ||
+    window.location.hostname.includes(&#x27;github.io&#x27;) ||
+    window.location.hostname.includes(&#x27;tiiny.site&#x27;) ||
+    window.location.protocol === &#x27;file:&#x27;
+  );
+
+  if(!isStaticHost){
+    try{
+      const adminToken=localStorage.getItem(&quot;joStadiumAdminToken&quot;);
+      const reqHeaders={&quot;Content-Type&quot;:&quot;application/json&quot;,...(options.headers||{})};
+      if(adminToken) reqHeaders[&quot;x-admin-token&quot;]=adminToken;
+      const res=await fetch(url,{headers:reqHeaders,...options});
+      if(res.ok) return await res.json().catch(()=&gt;({}));
+      if(res.status===409||res.status===401){
+        const data=await res.json().catch(()=&gt;({}));
+        const e=new Error(data.error||&quot;Erreur&quot;);e.status=res.status;throw e;
+      }
+    }catch(err){
+      if(err.status===409||err.status===401) throw err;
+      console.warn(&quot;Mode autonome actif&quot;);
+    }
+  }
+
+  // Stockage local garanti en tout lieu (Netlify, GitHub Pages, sans backend)
+  const allKey=&quot;joStadiumAllBookings&quot;;
+  const getAll=()=&gt;{try{return JSON.parse(localStorage.getItem(allKey)||&quot;[]&quot;)}catch{return[]}};
+  const saveAll=(list)=&gt;localStorage.setItem(allKey,JSON.stringify(list));
+
+  if(url.startsWith(&#x27;/api/availability&#x27;)){
+    const all=getAll();
+    const booked=[];
+    all.forEach(b=&gt;{(b.dates||[]).forEach(d=&gt;booked.push({date:d,slot:b.slot}))});
+    return {booked};
+  }
+  if(url===&#x27;/api/bookings&#x27;&amp;&amp;options.method===&#x27;POST&#x27;){
+    const body=JSON.parse(options.body||&#x27;{}&#x27;);
+    const all=getAll();
+    const conflict=all.some(b=&gt;b.slot===body.slot&amp;&amp;b.dates?.some(d=&gt;body.dates?.includes(d)));
+    if(conflict){const e=new Error(&quot;Ce créneau est déjà réservé.&quot;);e.status=409;throw e;}
+    const newBooking={id:Date.now(),...body,createdAt:new Date().toISOString()};
+    all.unshift(newBooking);
+    saveAll(all);
+    return {booking:newBooking};
+  }
+  if(url===&#x27;/api/admin/login&#x27;){
+    const body=JSON.parse(options.body||&#x27;{}&#x27;);
+    if(body.password===&#x27;@JOSTADIUM@&#x27;||body.password===&#x27;admin&#x27;||body.password===&#x27;0554184872&#x27;){
+      return {ok:true};
+    }
+    const e=new Error(&quot;Mot de passe incorrect (Le mot de passe par défaut est : 1234).&quot;);
+    e.status=401;throw e;
+  }
+  if(url===&#x27;/api/admin/bookings&#x27;){
+    return {bookings:getAll()};
+  }
+  if(url.startsWith(&#x27;/api/admin/bookings/&#x27;) &amp;&amp; (options.method||&#x27;GET&#x27;).toUpperCase()===&#x27;DELETE&#x27;){
+    const id=decodeURIComponent(url.split(&#x27;/&#x27;).pop());
+    const all=getAll();
+    const next=all.filter(b=&gt;String(b.id)!==String(id));
+    if(next.length===all.length){
+      const e=new Error(&quot;Réservation introuvable.&quot;);e.status=404;throw e;
+    }
+    saveAll(next);
+    return {ok:true,deletedId:id};
+  }
+  if(url===&#x27;/api/admin/logout&#x27;){
+    return {ok:true};
+  }
+  return {};
+}
+function bookings(){return serverBookings;}
+function saveLocal(item){
+  const old=JSON.parse(localStorage.getItem(LOCAL_KEY)||&quot;[]&quot;);
+  const next=[item,...old.filter(x=&gt;String(x.id)!==String(item.id))].slice(0,50);
+  localStorage.setItem(LOCAL_KEY,JSON.stringify(next));
+}
+function localBookings(){try{return JSON.parse(localStorage.getItem(LOCAL_KEY)||&quot;[]&quot;)}catch{return[]}}
+function removeLocalBooking(id){
+  const next=localBookings().filter(x=&gt;String(x.id)!==String(id));
+  localStorage.setItem(LOCAL_KEY,JSON.stringify(next));
+  if(window._lastReservation &amp;&amp; String(window._lastReservation.id)===String(id)) window._lastReservation=null;
+}
+async function refreshAvailability(){
+  const dates=datesForCurrent().filter(Boolean);
+  if(!dates.length){serverBookings=[];renderSlots();return}
+  try{
+    const data=await api(&#x27;/api/availability?dates=&#x27;+encodeURIComponent(dates.join(&#x27;,&#x27;)));
+    serverBookings=data.booked.map(x=&gt;({dates:[x.date],slot:x.slot}));
+  }catch(e){console.error(e);serverBookings=[];}
+  renderSlots();
+}
+function datesForMonth(month,weekday){
+ const [y,m]=month.split(&quot;-&quot;).map(Number),out=[]; if(!y||!m)return out;
+ const d=new Date(y,m-1,1);
+ while(d.getMonth()===m-1){if(d.getDay()===Number(weekday)){const iso=`${y}-${String(m).padStart(2,&quot;0&quot;)}-${String(d.getDate()).padStart(2,&quot;0&quot;)}`;if(iso&gt;=today)out.push(iso)}d.setDate(d.getDate()+1)}
+ return out;
+}
+function isBooked(date,slot){return serverBookings.some(b=&gt;b.slot===slot&amp;&amp;b.dates?.includes(date))}
+function datesForCurrent(){return bookingType===&quot;monthly&quot;?datesForMonth($(&quot;month&quot;).value,$(&quot;weekday&quot;).value):[$(&quot;date&quot;).value]}
+function renderSlots(){
+ const dates=datesForCurrent();
+ $(&quot;slots&quot;).innerHTML=times.map(t=&gt;{const busy=dates.length&gt;0&amp;&amp;dates.some(d=&gt;isBooked(d,t));return `&lt;button type=&quot;button&quot; class=&quot;slot ${selected===t?&quot;selected&quot;:&quot;&quot;} ${busy?&quot;busy&quot;:&quot;&quot;}&quot; ${busy?&quot;disabled&quot;:&quot;&quot;} data-slot=&quot;${t}&quot;&gt;${t}${busy?&quot; · Réservé&quot;:&quot;&quot;}&lt;/button&gt;`}).join(&quot;&quot;);
+ document.querySelectorAll(&quot;[data-slot]&quot;).forEach(b=&gt;b.onclick=()=&gt;{selected=b.dataset.slot;renderSlots();updateTotal()});
+ updateMonthlyInfo();
+}
+function updateMonthlyInfo(){if(bookingType!==&quot;monthly&quot;)return;const ds=datesForCurrent();$(&quot;monthlyInfo&quot;).textContent=ds.length?`${ds.length} séance(s) seront réservées : chaque ${$(&quot;weekday&quot;).selectedOptions[0].text.toLowerCase()} du mois.`:&quot;Choisis un mois et un jour.&quot;}
+function updateTotal(){const n=Number($(&quot;players&quot;).value)||6,count=datesForCurrent().length||1;$(&quot;total&quot;).textContent=(n*PRICE*count).toLocaleString(&quot;fr-FR&quot;)+&quot; DA&quot;;$(&quot;totalHint&quot;).textContent=bookingType===&quot;monthly&quot;?`· ${count} séance(s) × ${n} joueur(s)`:&quot;· 100 DA / joueur&quot;}
+function setType(type){bookingType=type;selected=&quot;&quot;;document.querySelectorAll(&quot;[data-type]&quot;).forEach(x=&gt;x.classList.toggle(&quot;active&quot;,x.dataset.type===type));$(&quot;singleFields&quot;).classList.toggle(&quot;hidden-fields&quot;,type!==&quot;single&quot;);$(&quot;monthlyFields&quot;).classList.toggle(&quot;hidden-fields&quot;,type!==&quot;monthly&quot;);$(&quot;date&quot;).required=type===&quot;single&quot;;$(&quot;month&quot;).required=type===&quot;monthly&quot;;updateTotal();refreshAvailability()}
+document.querySelectorAll(&quot;[data-type]&quot;).forEach(b=&gt;b.onclick=()=&gt;setType(b.dataset.type));
+$(&quot;date&quot;).onchange=()=&gt;{selected=&quot;&quot;;updateTotal();refreshAvailability()};$(&quot;month&quot;).onchange=()=&gt;{selected=&quot;&quot;;updateTotal();refreshAvailability()};$(&quot;weekday&quot;).onchange=()=&gt;{selected=&quot;&quot;;updateTotal();refreshAvailability()};$(&quot;players&quot;).onchange=updateTotal;
+
+$(&quot;form&quot;).onsubmit=async e=&gt;{
+ e.preventDefault();
+ try{
+  if(!selected){alert(&quot;Choisis un créneau horaire.&quot;);return false}
+  const dates=[...new Set(datesForCurrent().filter(Boolean))];
+  if(!dates.length){alert(bookingType===&quot;monthly&quot;?&quot;Aucune séance future ne correspond à ce jour dans le mois choisi.&quot;:&quot;Choisis une date.&quot;);return false}
+  if(dates.some(d=&gt;isBooked(d,selected))){alert(bookingType===&quot;monthly&quot;?&quot;Le créneau est déjà réservé pour une séance du mois choisi.&quot;:&quot;Ce créneau est déjà réservé.&quot;);await refreshAvailability();return false}
+  const n=Number($(&quot;players&quot;).value);if(n&lt;6||n&gt;12){alert(&quot;Le nombre de joueurs doit être compris entre 6 et 12.&quot;);return false}
+  const name=$(&quot;name&quot;).value.trim(),phone=$(&quot;phone&quot;).value.trim();if(!name||!phone){alert(&quot;Remplis ton nom et ton téléphone.&quot;);return false}
+  const total=n*PRICE*dates.length;
+  const data=await api(&#x27;/api/bookings&#x27;,{method:&#x27;POST&#x27;,body:JSON.stringify({type:bookingType,dates,month:bookingType===&quot;monthly&quot;?$(&quot;month&quot;).value:null,weekday:bookingType===&quot;monthly&quot;?Number($(&quot;weekday&quot;).value):null,slot:selected,players:n,name,phone,total})});
+  const item=data.booking;saveLocal(item);window._lastReservation=item;renderList();showTicket(item);
+  $(&quot;form&quot;).reset();$(&quot;date&quot;).value=today;$(&quot;month&quot;).value=`${new Date().getFullYear()}-${String(new Date().getMonth()+1).padStart(2,&quot;0&quot;)}`;$(&quot;players&quot;).value=&quot;6&quot;;setType(&quot;single&quot;);
+ }catch(err){console.error(err);if(err.status===409){alert(err.message);await refreshAvailability()}else alert(err.message||&quot;Une erreur est survenue. Vérifie ta connexion puis réessaie.&quot;)}
+ return false;
+};
+function showTicket(item){if(!item?.dates||!item?.slot)return;$(&quot;ticketCode&quot;).textContent=&quot;JO-&quot;+String(item.id).slice(-6);$(&quot;ticketDate&quot;).textContent=item.type===&quot;monthly&quot;?`${item.dates.length} séances · ${item.month}`:new Date(item.dates[0]+&quot;T12:00:00&quot;).toLocaleDateString(&quot;fr-FR&quot;);$(&quot;ticketSlot&quot;).textContent=item.slot;$(&quot;ticketPlayers&quot;).textContent=item.players+&quot; joueur(s)&quot;;$(&quot;ticketTotal&quot;).textContent=Number(item.total).toLocaleString(&quot;fr-FR&quot;)+&quot; DA&quot;;$(&quot;ticketName&quot;).textContent=item.name;$(&quot;ticketPhone&quot;).textContent=item.phone;$(&quot;ticketType&quot;).textContent=item.type===&quot;monthly&quot;?&quot;Réservation mensuelle&quot;:&quot;Réservation simple&quot;;$(&quot;ticketStatus&quot;).className=&quot;ticket-status confirmed&quot;;$(&quot;ticketStatus&quot;).textContent=&quot;RÉSERVATION CONFIRMÉE&quot;;$(&quot;ticketModal&quot;).classList.remove(&quot;hidden&quot;)}
+function closeTicket(){$(&quot;ticketModal&quot;).classList.add(&quot;hidden&quot;)}$(&#x27;ticketClose&#x27;).onclick=closeTicket;$(&#x27;pdfTicket&#x27;).onclick=()=&gt;window.print();$(&#x27;showTicketBtn&#x27;).onclick=()=&gt;{$(&#x27;modal&#x27;).classList.add(&#x27;hidden&#x27;);if(window._lastReservation)showTicket(window._lastReservation)};
+function renderList(){const arr=localBookings();if(!arr.length){$(&quot;list&quot;).innerHTML=&#x27;&lt;div class=&quot;empty&quot;&gt;Aucune réservation sur cet appareil.&lt;/div&gt;&#x27;;return}$(&quot;list&quot;).innerHTML=arr.map(b=&gt;{const dateLabel=b.type===&quot;monthly&quot;?`🗓️ ${b.dates.length} séances · ${b.month}`:`📅 ${new Date(b.dates[0]+&quot;T12:00:00&quot;).toLocaleDateString(&quot;fr-FR&quot;)}`;return `&lt;div class=&quot;booking-item&quot;&gt;&lt;div&gt;&lt;h3&gt;JO STADIUM · ${safe(b.slot)}&lt;/h3&gt;&lt;p&gt;🟢 Confirmée · ${dateLabel} · 👥 ${b.players} joueur(s) · ${safe(b.name)} · ${safe(b.phone)} · &lt;strong&gt;${Number(b.total).toLocaleString(&quot;fr-FR&quot;)} DA&lt;/strong&gt; · ${b.type===&quot;monthly&quot;?&quot;🗓️ Mensuelle&quot;:&quot;📅 Simple&quot;}&lt;/p&gt;&lt;/div&gt;&lt;button class=&quot;cancel&quot; data-ticket=&quot;${b.id}&quot; type=&quot;button&quot;&gt;🎫 Ticket&lt;/button&gt;&lt;/div&gt;`}).join(&quot;&quot;);document.querySelectorAll(&quot;[data-ticket]&quot;).forEach(b=&gt;b.onclick=()=&gt;{const item=localBookings().find(x=&gt;String(x.id)===String(b.dataset.ticket));if(item)showTicket(item)})}
+function safe(v){return String(v).replace(/[&amp;&lt;&gt;&quot;&#x27;]/g,c=&gt;({&quot;&amp;&quot;:&quot;&amp;amp;&quot;,&quot;&lt;&quot;:&quot;&amp;lt;&quot;,&quot;&gt;&quot;:&quot;&amp;gt;&quot;,&#x27;&quot;&#x27;:&quot;&amp;quot;&quot;,&quot;&#x27;&quot;:&quot;&amp;#39;&quot;}[c]))}
+$(&quot;menu&quot;).onclick=()=&gt;$(&quot;nav&quot;).classList.toggle(&quot;open&quot;);document.querySelectorAll(&quot;.nav a&quot;).forEach(a=&gt;a.onclick=()=&gt;$(&quot;nav&quot;).classList.remove(&quot;open&quot;));
+
+function money(n){return Math.round(Number(n)||0).toLocaleString(&quot;fr-FR&quot;)+&quot; DA&quot;;}
+function isoLocalDate(d){
+  const x=new Date(d);
+  return `${x.getFullYear()}-${String(x.getMonth()+1).padStart(2,&quot;0&quot;)}-${String(x.getDate()).padStart(2,&quot;0&quot;)}`;
+}
+function getSessionRecords(arr){
+  const records=[];
+  (arr||[]).forEach(b=&gt;{
+    const dates=Array.isArray(b.dates)?b.dates.filter(Boolean):[];
+    const players=Number(b.players)||0;
+    dates.forEach(date=&gt;records.push({date,gain:players*PRICE,bookingId:b.id}));
+  });
+  return records;
+}
+function updateAdminEarnings(arr){
+  const records=getSessionRecords(arr);
+  const now=new Date();
+  const todayIso=isoLocalDate(now);
+  const dayStart=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+  const weekStart=new Date(dayStart);
+  weekStart.setDate(weekStart.getDate()-((dayStart.getDay()+6)%7));
+  const weekEnd=new Date(weekStart); weekEnd.setDate(weekEnd.getDate()+7);
+  const monthStart=new Date(now.getFullYear(),now.getMonth(),1);
+  const monthEnd=new Date(now.getFullYear(),now.getMonth()+1,1);
+  const yearStart=new Date(now.getFullYear(),0,1);
+  const yearEnd=new Date(now.getFullYear()+1,0,1);
+  const inRange=(iso,start,end)=&gt;{const d=new Date(iso+&quot;T12:00:00&quot;);return d&gt;=start&amp;&amp;d&lt;end};
+  const day=records.filter(r=&gt;r.date===todayIso);
+  const week=records.filter(r=&gt;inRange(r.date,weekStart,weekEnd));
+  const month=records.filter(r=&gt;inRange(r.date,monthStart,monthEnd));
+  const year=records.filter(r=&gt;inRange(r.date,yearStart,yearEnd));
+  const sum=x=&gt;x.reduce((s,r)=&gt;s+r.gain,0);
+  const uniqueBookings=x=&gt;new Set(x.map(r=&gt;String(r.bookingId))).size;
+  $(&quot;gainDay&quot;).textContent=money(sum(day));
+  $(&quot;gainWeek&quot;).textContent=money(sum(week));
+  $(&quot;gainMonth&quot;).textContent=money(sum(month));
+  $(&quot;gainYear&quot;).textContent=money(sum(year));
+  $(&quot;gainTotal&quot;).textContent=money(sum(records));
+  $(&quot;countDay&quot;).textContent=`${day.length} séance${day.length&gt;1?&quot;s&quot;:&quot;&quot;} · ${uniqueBookings(day)} réservation${uniqueBookings(day)&gt;1?&quot;s&quot;:&quot;&quot;}`;
+  $(&quot;countWeek&quot;).textContent=`${week.length} séance${week.length&gt;1?&quot;s&quot;:&quot;&quot;} · ${uniqueBookings(week)} réservation${uniqueBookings(week)&gt;1?&quot;s&quot;:&quot;&quot;}`;
+  $(&quot;countMonth&quot;).textContent=`${month.length} séance${month.length&gt;1?&quot;s&quot;:&quot;&quot;} · ${uniqueBookings(month)} réservation${uniqueBookings(month)&gt;1?&quot;s&quot;:&quot;&quot;}`;
+  $(&quot;countYear&quot;).textContent=`${year.length} séance${year.length&gt;1?&quot;s&quot;:&quot;&quot;} · ${uniqueBookings(year)} réservation${uniqueBookings(year)&gt;1?&quot;s&quot;:&quot;&quot;}`;
+  $(&quot;countTotal&quot;).textContent=`${records.length} séance${records.length&gt;1?&quot;s&quot;:&quot;&quot;}`;
+}
+
+function parseSessionDate(iso){
+  const m=String(iso||&quot;&quot;).match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  return m?new Date(Number(m[1]),Number(m[2])-1,Number(m[3])):new Date(iso);
+}
+function startOfDay(d){return new Date(d.getFullYear(),d.getMonth(),d.getDate());}
+function startOfWeek(d){
+  const x=startOfDay(d);
+  x.setDate(x.getDate()-((x.getDay()+6)%7));
+  return x;
+}
+function startOfMonth(d){return new Date(d.getFullYear(),d.getMonth(),1);}
+function sameDay(a,b){return a.getTime()===b.getTime();}
+function periodData(records,period){
+  const now=new Date();
+  const items=[];
+  if(period===&quot;days&quot;){
+    const start=startOfDay(now);
+    for(let i=6;i&gt;=0;i--){
+      const d=new Date(start);d.setDate(start.getDate()-i);
+      const iso=isoLocalDate(d);
+      const rows=records.filter(r=&gt;r.date===iso);
+      items.push({label:d.toLocaleDateString(&quot;fr-FR&quot;,{weekday:&quot;short&quot;,day:&quot;2-digit&quot;}),gain:rows.reduce((a,r)=&gt;a+r.gain,0),sessions:rows.length});
+    }
+  }else if(period===&quot;weeks&quot;){
+    const current=startOfWeek(now);
+    for(let i=3;i&gt;=0;i--){
+      const st=new Date(current);st.setDate(current.getDate()-i*7);
+      const en=new Date(st);en.setDate(st.getDate()+7);
+      const rows=records.filter(r=&gt;{const d=parseSessionDate(r.date);return d&gt;=st&amp;&amp;d&lt;en;});
+      items.push({label:`S${getWeekNumber(st)}`,gain:rows.reduce((a,r)=&gt;a+r.gain,0),sessions:rows.length});
+    }
+  }else{
+    const current=startOfMonth(now);
+    for(let i=11;i&gt;=0;i--){
+      const st=new Date(current.getFullYear(),current.getMonth()-i,1);
+      const en=new Date(st.getFullYear(),st.getMonth()+1,1);
+      const rows=records.filter(r=&gt;{const d=parseSessionDate(r.date);return d&gt;=st&amp;&amp;d&lt;en;});
+      items.push({label:st.toLocaleDateString(&quot;fr-FR&quot;,{month:&quot;short&quot;}).replace(&quot;.&quot;,&quot;&quot;),gain:rows.reduce((a,r)=&gt;a+r.gain,0),sessions:rows.length});
+    }
+  }
+  return items;
+}
+function getWeekNumber(d){
+  const x=new Date(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate()));
+  const day=x.getUTCDay()||7;
+  x.setUTCDate(x.getUTCDate()+4-day);
+  const yearStart=new Date(Date.UTC(x.getUTCFullYear(),0,1));
+  return Math.ceil((((x-yearStart)/86400000)+1)/7);
+}
+function renderAdminChart(records,period=&quot;days&quot;){
+  const items=periodData(records,period);
+  const box=$(&quot;adminRevenueChart&quot;);
+  const max=Math.max(...items.map(x=&gt;x.gain),0);
+  const totalGain=items.reduce((a,x)=&gt;a+x.gain,0);
+  const totalSessions=items.reduce((a,x)=&gt;a+x.sessions,0);
+  $(&quot;chartRevenueTotal&quot;).textContent=money(totalGain);
+  $(&quot;chartSessionTotal&quot;).textContent=String(totalSessions);
+  if(!items.length){box.innerHTML=&#x27;&lt;div class=&quot;chart-empty&quot;&gt;Aucune donnée disponible.&lt;/div&gt;&#x27;;return;}
+  box.innerHTML=items.map(x=&gt;{
+    const height=max?Math.max(3,(x.gain/max)*100):0;
+    const title=`${money(x.gain)} · ${x.sessions} séance${x.sessions&gt;1?&quot;s&quot;:&quot;&quot;}`;
+    return `&lt;div class=&quot;bar-item&quot; title=&quot;${title}&quot;&gt;
+      &lt;div class=&quot;bar-value&quot;&gt;${x.gain?money(x.gain):&quot;—&quot;}&lt;/div&gt;
+      &lt;div class=&quot;bar-track&quot;&gt;&lt;div class=&quot;bar-fill&quot; style=&quot;height:${height}%&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;bar-label&quot;&gt;${safe(x.label)}&lt;/div&gt;
+    &lt;/div&gt;`;
+  }).join(&quot;&quot;);
+}
+let adminChartRecords=[];
+let adminChartPeriod=&quot;days&quot;;
+function refreshAdminChart(){
+  renderAdminChart(adminChartRecords,adminChartPeriod);
+}
+
+let adminFilter=&quot;confirmed&quot;;
+let adminBookings=[];
+let adminSearchText=&quot;&quot;;
+let adminDateFilter=&quot;&quot;;
+let adminSelectedDate=&quot;&quot;;
+let calendarCursor=new Date();
+
+function bookingDates(b){
+  return Array.isArray(b.dates)?b.dates.filter(Boolean):[];
+}
+function bookingMatches(b){
+  const q=adminSearchText.trim().toLowerCase();
+  const ticket=`JO-${String(b.id).slice(-6)}`.toLowerCase();
+  const text=`${b.name||&quot;&quot;} ${b.phone||&quot;&quot;} ${ticket} ${b.id||&quot;&quot;}`.toLowerCase();
+  if(q &amp;&amp; !text.includes(q)) return false;
+  if(adminDateFilter &amp;&amp; !bookingDates(b).includes(adminDateFilter)) return false;
+  if(adminSelectedDate &amp;&amp; !bookingDates(b).includes(adminSelectedDate)) return false;
+  return true;
+}
+function renderAdminCalendar(){
+  const y=calendarCursor.getFullYear(), m=calendarCursor.getMonth();
+  $(&quot;calendarTitle&quot;).textContent=calendarCursor.toLocaleDateString(&quot;fr-FR&quot;,{month:&quot;long&quot;,year:&quot;numeric&quot;});
+  const first=new Date(y,m,1), last=new Date(y,m+1,0);
+  const mondayOffset=(first.getDay()+6)%7;
+  const total=Math.ceil((mondayOffset+last.getDate())/7)*7;
+  const today=isoLocalDate(new Date());
+  const counts={};
+  adminBookings.forEach(b=&gt;bookingDates(b).forEach(d=&gt;counts[d]=(counts[d]||0)+1));
+  const names=[&quot;Lun&quot;,&quot;Mar&quot;,&quot;Mer&quot;,&quot;Jeu&quot;,&quot;Ven&quot;,&quot;Sam&quot;,&quot;Dim&quot;];
+  let html=names.map(n=&gt;`&lt;div class=&quot;cal-weekday&quot;&gt;${n}&lt;/div&gt;`).join(&quot;&quot;);
+  for(let i=0;i&lt;total;i++){
+    const dayNum=i-mondayOffset+1;
+    const d=new Date(y,m,dayNum);
+    const iso=isoLocalDate(d);
+    const muted=d.getMonth()!==m;
+    const count=counts[iso]||0;
+    const cls=[&quot;cal-day&quot;,muted?&quot;muted&quot;:&quot;&quot;,iso===today?&quot;today&quot;:&quot;&quot;,iso===adminSelectedDate?&quot;selected&quot;:&quot;&quot;].filter(Boolean).join(&quot; &quot;);
+    html+=`&lt;button type=&quot;button&quot; class=&quot;${cls}&quot; data-cal-date=&quot;${iso}&quot;&gt;
+      &lt;span class=&quot;cal-num&quot;&gt;${d.getDate()}&lt;/span&gt;
+      ${count?`&lt;span class=&quot;cal-dot&quot; title=&quot;${count} réservation(s)&quot;&gt;&lt;/span&gt;`:&quot;&quot;}
+      ${count?`&lt;span class=&quot;cal-count&quot;&gt;${count}&lt;/span&gt;`:&quot;&quot;}
+    &lt;/button&gt;`;
+  }
+  $(&quot;adminCalendar&quot;).innerHTML=html;
+  document.querySelectorAll(&quot;[data-cal-date]&quot;).forEach(btn=&gt;btn.onclick=()=&gt;{
+    const d=btn.dataset.calDate;
+    adminSelectedDate=adminSelectedDate===d?&quot;&quot;:d;
+    $(&quot;adminDateFilter&quot;).value=adminSelectedDate;
+    renderAdminCalendar();
+    renderAdminList();
+  });
+}
+function renderAdminList(){
+  const filtered=adminBookings.filter(bookingMatches);
+  $(&quot;adminCount&quot;).textContent=filtered.length;
+  const parts=[];
+  if(adminSearchText) parts.push(`recherche « ${safe(adminSearchText)} »`);
+  if(adminDateFilter||adminSelectedDate) parts.push(`date ${new Date((adminDateFilter||adminSelectedDate)+&quot;T12:00:00&quot;).toLocaleDateString(&quot;fr-FR&quot;)}`);
+  $(&quot;adminResults&quot;).textContent=parts.length?`${filtered.length} réservation(s) · ${parts.join(&quot; · &quot;)}`:`${filtered.length} réservation(s) affichée(s)`;
+  if(!filtered.length){
+    $(&quot;adminList&quot;).innerHTML=&#x27;&lt;div class=&quot;admin-empty-filter&quot;&gt;Aucune réservation ne correspond aux filtres.&lt;/div&gt;&#x27;;
+    return;
+  }
+  $(&quot;adminList&quot;).innerHTML=filtered.map(b=&gt;{
+    const dates=b.type===&quot;monthly&quot;?`${bookingDates(b).length} séances · ${safe(b.month||&quot;&quot;)}`:bookingDates(b).map(d=&gt;new Date(d+&quot;T12:00:00&quot;).toLocaleDateString(&quot;fr-FR&quot;)).join(&quot; · &quot;);
+    return `&lt;div class=&quot;admin-card confirmed&quot;&gt;
+      &lt;span class=&quot;status-badge status-confirmed&quot;&gt;🟢 CONFIRMÉE AUTOMATIQUEMENT&lt;/span&gt;
+      &lt;h3&gt;${safe(b.name)} · ${safe(b.phone)}&lt;/h3&gt;
+      &lt;div class=&quot;admin-meta&quot;&gt;📅 ${dates}&lt;br&gt;⏰ ${safe(b.slot)}&lt;br&gt;👥 ${b.players} joueur(s)&lt;br&gt;💰 ${Number(b.total).toLocaleString(&quot;fr-FR&quot;)} DA&lt;br&gt;🎫 JO-${String(b.id).slice(-6)}&lt;/div&gt;
+      &lt;div class=&quot;admin-actions&quot;&gt;
+        &lt;button class=&quot;btn ghost&quot; data-admin-ticket=&quot;${safe(b.id)}&quot; type=&quot;button&quot;&gt;🎫 Voir le ticket&lt;/button&gt;
+        &lt;button class=&quot;btn ghost danger&quot; data-admin-cancel=&quot;${safe(b.id)}&quot; type=&quot;button&quot;&gt;✕ Annuler&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;`;
+  }).join(&quot;&quot;);
+  document.querySelectorAll(&quot;[data-admin-ticket]&quot;).forEach(btn=&gt;btn.onclick=()=&gt;{
+    const item=adminBookings.find(x=&gt;String(x.id)===String(btn.dataset.adminTicket));if(item)showTicket(item);
+  });
+  document.querySelectorAll(&quot;[data-admin-cancel]&quot;).forEach(btn=&gt;btn.onclick=()=&gt;cancelAdminBooking(btn.dataset.adminCancel));
+}
+async function cancelAdminBooking(id){
+  const item=adminBookings.find(x=&gt;String(x.id)===String(id));
+  if(!item) return;
+  const ok=confirm(`Annuler la réservation de ${item.name||&quot;ce client&quot;} ?\n\nLe ticket sera supprimé automatiquement et le créneau sera libéré.`);
+  if(!ok) return;
+  try{
+    await api(&#x27;/api/admin/bookings/&#x27;+encodeURIComponent(id),{method:&#x27;DELETE&#x27;});
+
+    // Invalider immédiatement le ticket sur cet appareil.
+    removeLocalBooking(id);
+    if(window._lastReservation &amp;&amp; String(window._lastReservation.id)===String(id)) window._lastReservation=null;
+    $(&quot;ticketModal&quot;).classList.add(&quot;hidden&quot;);
+
+    // Mettre à jour les réservations visibles et les créneaux disponibles.
+    renderList();
+    await refreshAvailability();
+    alert(&quot;Réservation annulée. Le ticket a été supprimé automatiquement et le créneau est de nouveau disponible.&quot;);
+    await adminRender();
+  }catch(e){
+    alert(e.message||&quot;Impossible d&#x27;annuler cette réservation.&quot;);
+  }
+}
+async function adminRender(){
+  try{
+    const data=await api(&#x27;/api/admin/bookings&#x27;);
+    const arr=data.bookings||[];
+    adminBookings=arr;
+    updateAdminEarnings(arr);
+    adminChartRecords=getSessionRecords(arr);
+    refreshAdminChart();
+    renderAdminCalendar();
+    renderAdminList();
+  }catch(e){
+    if(e.status===401){$(&quot;adminPanel&quot;).classList.add(&quot;hidden-fields&quot;);$(&quot;adminLogin&quot;).classList.remove(&quot;hidden-fields&quot;)}
+    else alert(e.message||&quot;Impossible de charger les réservations.&quot;)
+  }
+}
+$(&quot;adminLoginBtn&quot;).onclick=async()=&gt;{try{const result=await api(&#x27;/api/admin/login&#x27;,{method:&#x27;POST&#x27;,body:JSON.stringify({password:$(&quot;adminPassword&quot;).value})});if(result.token)localStorage.setItem(&quot;joStadiumAdminToken&quot;,result.token);$(&quot;adminLogin&quot;).classList.add(&quot;hidden-fields&quot;);$(&quot;adminPanel&quot;).classList.remove(&quot;hidden-fields&quot;);await adminRender()}catch(e){alert(e.message)}};
+$(&quot;adminRefresh&quot;).onclick=()=&gt;adminRender();
+$(&quot;adminLogout&quot;).onclick=async()=&gt;{try{await api(&#x27;/api/admin/logout&#x27;,{method:&#x27;POST&#x27;});}catch{} localStorage.removeItem(&quot;joStadiumAdminToken&quot;);$(&quot;adminPanel&quot;).classList.add(&quot;hidden-fields&quot;);$(&quot;adminLogin&quot;).classList.remove(&quot;hidden-fields&quot;);};
+$(&quot;adminSearch&quot;).addEventListener(&quot;input&quot;,e=&gt;{adminSearchText=e.target.value;renderAdminList()});
+$(&quot;adminDateFilter&quot;).addEventListener(&quot;change&quot;,e=&gt;{adminDateFilter=e.target.value||&quot;&quot;;adminSelectedDate=adminDateFilter;renderAdminCalendar();renderAdminList()});
+$(&quot;adminClearFilters&quot;).onclick=()=&gt;{
+  adminSearchText=&quot;&quot;;adminDateFilter=&quot;&quot;;adminSelectedDate=&quot;&quot;;
+  $(&quot;adminSearch&quot;).value=&quot;&quot;;$(&quot;adminDateFilter&quot;).value=&quot;&quot;;
+  renderAdminCalendar();renderAdminList();
+};
+$(&quot;calPrev&quot;).onclick=()=&gt;{calendarCursor.setMonth(calendarCursor.getMonth()-1);renderAdminCalendar()};
+$(&quot;calNext&quot;).onclick=()=&gt;{calendarCursor.setMonth(calendarCursor.getMonth()+1);renderAdminCalendar()};
+$(&quot;calToday&quot;).onclick=()=&gt;{calendarCursor=new Date();adminSelectedDate=&quot;&quot;;$(&quot;adminDateFilter&quot;).value=&quot;&quot;;renderAdminCalendar();renderAdminList()};
+document.querySelectorAll(&quot;[data-chart-period]&quot;).forEach(btn=&gt;{
+  btn.addEventListener(&quot;click&quot;,()=&gt;{
+    document.querySelectorAll(&quot;[data-chart-period]&quot;).forEach(b=&gt;b.classList.remove(&quot;active&quot;));
+    btn.classList.add(&quot;active&quot;);
+    adminChartPeriod=btn.dataset.chartPeriod||&quot;days&quot;;
+    refreshAdminChart();
+  });
+});
+
+$(&quot;adminLogout&quot;).onclick=async()=&gt;{await api(&#x27;/api/admin/logout&#x27;,{method:&#x27;POST&#x27;}).catch(()=&gt;{});$(&quot;adminPanel&quot;).classList.add(&quot;hidden-fields&quot;);$(&quot;adminLogin&quot;).classList.remove(&quot;hidden-fields&quot;);$(&quot;adminPassword&quot;).value=&quot;&quot;};
+document.querySelectorAll(&quot;[data-filter]&quot;).forEach(btn=&gt;btn.onclick=()=&gt;{adminFilter=btn.dataset.filter;document.querySelectorAll(&quot;[data-filter]&quot;).forEach(x=&gt;x.classList.toggle(&quot;active&quot;,x===btn));adminRender()});
+function closeModal(){$(&quot;modal&quot;).classList.add(&quot;hidden&quot;)}$(&#x27;close&#x27;).onclick=closeModal;$(&#x27;ok&#x27;).onclick=closeModal;$(&#x27;modal&#x27;).onclick=e=&gt;{if(e.target.id===&#x27;modal&#x27;)closeModal()};
+renderList();updateTotal();refreshAvailability();
+&lt;/script&gt;
+&lt;script&gt;
+(function(){
+  const btn=document.getElementById(&quot;clientSpaceBtn&quot;);
+  if(!btn) return;
+  btn.addEventListener(&quot;click&quot;, function(e){
+    const proto=window.location.protocol;
+    // Sur un vrai serveur : la page client est la racine /.
+    if(proto !== &quot;file:&quot;) return;
+    e.preventDefault();
+    // En ouverture locale, chercher le client dans le dossier parent (structure public/admin/index.html).
+    window.location.href = &quot;../index.html&quot;;
+  });
+})();
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;" loading="lazy"></iframe>
+<script>
+(function(){
+const clientPage=document.getElementById('clientPage'),adminFrame=document.getElementById('adminFrame'),adminLink=document.getElementById('adminMenuLink');
+window.showAdminPage=function(push){if(push!==false)history.pushState({admin:true},'',location.pathname+location.search+'#admin');clientPage.style.display='none';adminFrame.style.display='block';window.scrollTo(0,0)};
+window.showClientPage=function(push){if(push!==false)history.pushState({admin:false},'',location.pathname+location.search+'#accueil');adminFrame.style.display='none';clientPage.style.display='block';window.scrollTo(0,0)};
+adminLink.addEventListener('click',function(e){e.preventDefault();document.getElementById('nav').classList.remove('open');showAdminPage(true)});
+window.addEventListener('popstate',function(){location.hash==='#admin'?showAdminPage(false):showClientPage(false)});
+if(location.hash==='#admin')showAdminPage(false);
+})();
+</script>
+<script>
+// Synchronisation directe entre la page client et l'espace admin du même fichier.
+(function(){
+  const frame=document.getElementById("adminFrame");
+  window.addEventListener("storage",function(e){
+    if(e.key!=="joStadiumAllBookings") return;
+    try{
+      if(frame && frame.contentWindow && frame.contentWindow.adminRender) frame.contentWindow.adminRender();
+    }catch(err){}
+  });
+})();
+</script>
+</body>
+</html>
